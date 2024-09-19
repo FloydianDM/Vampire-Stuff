@@ -35,6 +35,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         _cinemachineVirtualCamera.Follow = Player.transform;
     }
 
+    public void OpenSettingsMenu()
+    {
+        SceneManager.LoadScene(Settings.SETTINGS_SCENE_TAG, LoadSceneMode.Additive);
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene(Settings.GAME_SCENE_TAG);

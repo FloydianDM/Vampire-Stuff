@@ -20,5 +20,6 @@ public class PlayerLevelManager : MonoBehaviour
         PlayerLevel++;
 
         _levelUpEvent.CallLevelUpEvent(PlayerLevel);
+        StaticEventHandler.CallCombatNotifiedEvent("LEVELED UP!", 1f);
     }
 }

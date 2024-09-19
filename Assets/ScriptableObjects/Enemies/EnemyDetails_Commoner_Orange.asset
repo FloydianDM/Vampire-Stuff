@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: Commoner
   EnemyPrefab: {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
-  SpeedMin: 2
-  SpeedMax: 3.5
+  SpeedMin: 3
+  SpeedMax: 4.5
   DodgeThrust: 10
   HealthMin: 50
   HealthMax: 70

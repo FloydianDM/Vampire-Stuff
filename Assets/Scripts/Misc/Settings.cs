@@ -11,6 +11,8 @@ public static class Settings
     #region SCENE TAGS
 
     public const string GAME_SCENE_TAG = "GameScene";
+    public const string MAIN_MENU_SCENE_TAG = "MainMenuScene";
+    public const string SETTINGS_SCENE_TAG = "SettingsScene";
 
     #endregion
     

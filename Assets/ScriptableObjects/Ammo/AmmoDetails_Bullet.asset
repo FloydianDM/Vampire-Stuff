@@ -16,8 +16,8 @@ MonoBehaviour:
   Prefab: {fileID: 4389202041880086128, guid: c2594d3382d180a4b83f57b4202365a7, type: 3}
   SpeedMin: 7
   SpeedMax: 10
-  DamageMin: 20
-  DamageMax: 35
+  DamageMin: 7
+  DamageMax: 10
   RangeMin: 5
   RangeMax: 15
   RotationSpeed: 0

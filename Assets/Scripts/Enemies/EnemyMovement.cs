@@ -118,7 +118,7 @@ public class EnemyMovement : MonoBehaviour
 
             yield return new WaitForSeconds(_dodgeTime);
 
-            StaticEventHandler.CallCombatNotifiedEvent("ENEMY DODGED", _dodgeTime);
+            StaticEventHandler.CallCombatNotifiedEvent("ENEMY DODGED", 0.5f);
         }
         else
         {
