@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27eaee1842247d04f8fa9c32bff78a72, type: 3}
+  m_Name: EnemyDetails_Commoner_Orange
+  m_EditorClassIdentifier: 
+  Type: Commoner
+  EnemyPrefab: {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
+  SpeedMin: 2
+  SpeedMax: 3.5
+  DodgeThrust: 10
+  HealthMin: 50
+  HealthMax: 70
+  Damage: 7
+  ExperienceDrop: 2
+  Awareness: 0.6
+  Agility: 4

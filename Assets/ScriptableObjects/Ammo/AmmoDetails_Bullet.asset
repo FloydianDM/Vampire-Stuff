@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94b51c8c94b127438de8d3002dbd4f3, type: 3}
+  m_Name: AmmoDetails_Bullet
+  m_EditorClassIdentifier: 
+  Name: Bullet
+  Prefab: {fileID: 4389202041880086128, guid: c2594d3382d180a4b83f57b4202365a7, type: 3}
+  SpeedMin: 7
+  SpeedMax: 10
+  DamageMin: 20
+  DamageMax: 35
+  RangeMin: 5
+  RangeMax: 15
+  RotationSpeed: 0
+  SpawnAmountMin: 1
+  SpawnAmountMax: 1
+  SpawnIntervalMin: 1
+  SpawnIntervalMax: 1
