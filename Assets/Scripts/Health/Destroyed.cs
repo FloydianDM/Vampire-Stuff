@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(DestroyedEvent))]
@@ -9,6 +10,7 @@ public class Destroyed : MonoBehaviour
     private Enemy _enemy;
 
     private GameManager _gameManager => GameManager.Instance;
+    private PoolManager _poolManager => PoolManager.Instance;
 
     private void Awake()
     {
@@ -44,12 +46,24 @@ public class Destroyed : MonoBehaviour
 
         if (args.IsEnemyDied)
         {
-            gameObject.SetActive(false);
-            _gameManager.Player.ReceiveXPEvent.CallReceiveXPEvent(_enemyDetails.ExperienceDrop);
+            ExecuteEnemyDeath();
 
             return;
         }
 
         Destroy(gameObject);
+    }
+
+    private void ExecuteEnemyDeath()
+    {
+        EnemyDeathEffect enemyDeathEffect = 
+            (EnemyDeathEffect)_poolManager.ReuseComponent(_enemyDetails.EnemyDeathEffect.Prefab, transform.position, Quaternion.identity);
+        
+        enemyDeathEffect.InitialiseEnemyDeathEffect(transform.position);
+
+        enemyDeathEffect.PlayEnemyDeathEffect();
+        gameObject.SetActive(false);
+        
+        _gameManager.Player.ReceiveXPEvent.CallReceiveXPEvent(_enemyDetails.ExperienceDrop);
     }
 }

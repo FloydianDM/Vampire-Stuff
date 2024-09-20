@@ -14,4 +14,7 @@ public class EnemyDetailsSO : ScriptableObject
     [Range(1, 20)] public int ExperienceDrop;
     [Range(0, 2)] public float Awareness;
     [Range(0, 20)] public float Agility;
+
+    [Header("EFFECTS")]
+    public EnemyDeathEffectSO EnemyDeathEffect;
 }

@@ -1,7 +1,8 @@
 public enum TypeEnum
 {
     Fireable,
-    Enemy
+    Enemy,
+    EnemyDeathEffect,
 }
 
 public enum GameState
