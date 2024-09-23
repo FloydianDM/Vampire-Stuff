@@ -91,6 +91,12 @@ public class EnemyMovement : MonoBehaviour
                 Vector2 direction = (_playerTransform.position - transform.position).normalized;
 
                 _enemy.Rigidbody.velocity = direction * _speed;
+                
+                _enemy.MovementByVelocityEvent.CallMovementToVelocityEvent(_speed, direction);
+            }
+            else
+            {
+                _enemy.IdleEvent.CallIdleEvent();
             }
 
             yield return new WaitForSeconds(_followSensitivity);

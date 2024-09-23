@@ -3,11 +3,16 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(HealthEvent))]
 [RequireComponent(typeof(Destroyed))]
 [RequireComponent(typeof(DestroyedEvent))]
 [RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(Idle))]
+[RequireComponent(typeof(IdleEvent))]
+[RequireComponent(typeof(MovementByVelocity))]
+[RequireComponent(typeof(MovementByVelocityEvent))]
 [DisallowMultipleComponent]
 public class Enemy : MonoBehaviour
 {
@@ -16,15 +21,21 @@ public class Enemy : MonoBehaviour
     private HealthEvent _healthEvent;
     [HideInInspector] public EnemyMovement EnemyMovement;
     [HideInInspector] public Rigidbody2D Rigidbody;
+    [HideInInspector] public IdleEvent IdleEvent;
+    [HideInInspector] public MovementByVelocityEvent MovementByVelocityEvent;
+    [HideInInspector] public Animator Animator;
 
     private GameResources _gameResources => GameResources.Instance;
 
     private void Awake()
     {
+        Animator = GetComponent<Animator>();
         _health = GetComponent<Health>();
         _healthEvent = GetComponent<HealthEvent>();
         EnemyMovement = GetComponent<EnemyMovement>();
         Rigidbody = GetComponent<Rigidbody2D>();
+        IdleEvent = GetComponent<IdleEvent>();
+        MovementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
     }
     
     private void OnEnable()

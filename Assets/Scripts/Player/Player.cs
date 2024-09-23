@@ -7,11 +7,15 @@ using UnityEngine;
 [RequireComponent(typeof(HealthEvent))]
 [RequireComponent(typeof(Destroyed))]
 [RequireComponent(typeof(DestroyedEvent))]
+[RequireComponent(typeof(Idle))]
+[RequireComponent(typeof(IdleEvent))]
 [RequireComponent(typeof(EnemyFinder))]
 [RequireComponent(typeof(ReceiveXP))]
 [RequireComponent(typeof(ReceiveXPEvent))]
 [RequireComponent(typeof(PlayerLevelManager))]
 [RequireComponent(typeof(LevelUpEvent))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AnimatePlayer))]
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
@@ -19,10 +23,12 @@ public class Player : MonoBehaviour
     [HideInInspector] public MovementByVelocityEvent MovementToVelocityEvent;
     [HideInInspector] public PlayerDetailsSO PlayerDetails;
     [HideInInspector] public HealthEvent HealthEvent;
+    [HideInInspector] public IdleEvent IdleEvent;
     [HideInInspector] public ReceiveXP ReceiveXP;
     [HideInInspector] public ReceiveXPEvent ReceiveXPEvent;
     [HideInInspector] public PlayerLevelManager PlayerLevelManager;
     [HideInInspector] public LevelUpEvent LevelUpEvent;
+    [HideInInspector] public Animator Animator;
 
     private Health _health;
 
@@ -32,10 +38,12 @@ public class Player : MonoBehaviour
         MovementToVelocityEvent = GetComponent<MovementByVelocityEvent>();
         _health = GetComponent<Health>();
         HealthEvent = GetComponent<HealthEvent>();
+        IdleEvent = GetComponent<IdleEvent>();
         ReceiveXP = GetComponent<ReceiveXP>();
         ReceiveXPEvent = GetComponent<ReceiveXPEvent>();
         PlayerLevelManager = GetComponent<PlayerLevelManager>();
         LevelUpEvent = GetComponent<LevelUpEvent>();
+        Animator = GetComponent<Animator>();
     }
 
     private void OnEnable()

@@ -23,4 +23,4 @@ MonoBehaviour:
   ExperienceDrop: 1
   Awareness: 0.4
   Agility: 6
-  EnemyDeathEffect: {fileID: 0}
+  EnemyDeathEffect: {fileID: 11400000, guid: 8d60e927f7406c1499e5caf1dfcae542, type: 2}

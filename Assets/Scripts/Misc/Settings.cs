@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class Settings
 {
     #region OBJECT TAGS
@@ -20,6 +22,13 @@ public static class Settings
 
     public const float RESET_CONTACT_COLLISION_TIME = 1f;
     
+    #endregion
+
+    #region ANIMATORS PARAMETERS
+
+    public static int IsMoving = Animator.StringToHash("isMoving");
+    public static int IsIdle = Animator.StringToHash("isIdle");
+
     #endregion
     
 }

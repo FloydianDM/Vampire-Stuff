@@ -76,6 +76,11 @@ public class PlayerControls : MonoBehaviour
     private void MovementInput()
     {
         _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.PlayerDetails.Speed, _movement);
+
+        if (_movement == Vector2.zero)
+        {
+            _player.IdleEvent.CallIdleEvent();
+        }
     }
 
     private void EnablePlayerControls(bool shouldEnable)
