@@ -55,13 +55,7 @@ public class Destroyed : MonoBehaviour
 
     private void ExecuteEnemyDeath()
     {
-        EnemyDeathEffect enemyDeathEffect = 
-            (EnemyDeathEffect)_poolManager.ReuseComponent(_enemyDetails.EnemyDeathEffect.Prefab, transform.position, Quaternion.identity);
-        
-        enemyDeathEffect.InitialiseEnemyDeathEffect(transform.position);
-
-        enemyDeathEffect.PlayEnemyDeathEffect();
-        gameObject.SetActive(false);
+        _enemy.EnemyDieEvent.CallEnemyDieEvent(1f);
         
         _gameManager.Player.ReceiveXPEvent.CallReceiveXPEvent(_enemyDetails.ExperienceDrop);
     }

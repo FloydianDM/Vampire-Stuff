@@ -28,6 +28,7 @@ public static class Settings
 
     public static int IsMoving = Animator.StringToHash("isMoving");
     public static int IsIdle = Animator.StringToHash("isIdle");
+    public static int IsDying = Animator.StringToHash("isDying");
 
     #endregion
     

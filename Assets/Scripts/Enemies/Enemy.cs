@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Animator))]
@@ -9,10 +8,13 @@ using UnityEngine;
 [RequireComponent(typeof(Destroyed))]
 [RequireComponent(typeof(DestroyedEvent))]
 [RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(AnimateEnemy))]
 [RequireComponent(typeof(Idle))]
 [RequireComponent(typeof(IdleEvent))]
 [RequireComponent(typeof(MovementByVelocity))]
 [RequireComponent(typeof(MovementByVelocityEvent))]
+[RequireComponent(typeof(EnemyDie))]
+[RequireComponent(typeof(EnemyDieEvent))]
 [DisallowMultipleComponent]
 public class Enemy : MonoBehaviour
 {
@@ -23,9 +25,8 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Rigidbody2D Rigidbody;
     [HideInInspector] public IdleEvent IdleEvent;
     [HideInInspector] public MovementByVelocityEvent MovementByVelocityEvent;
+    [HideInInspector] public EnemyDieEvent EnemyDieEvent;
     [HideInInspector] public Animator Animator;
-
-    private GameResources _gameResources => GameResources.Instance;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class Enemy : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody2D>();
         IdleEvent = GetComponent<IdleEvent>();
         MovementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
+        EnemyDieEvent = GetComponent<EnemyDieEvent>();
     }
     
     private void OnEnable()
@@ -78,10 +80,5 @@ public class Enemy : MonoBehaviour
     {
         DestroyedEvent destroyedEvent = GetComponent<DestroyedEvent>();
         destroyedEvent.CallDestroyedEvent(false, true);
-    }
-
-    public void DisableEnemy()
-    {
-        gameObject.SetActive(false);
     }
 }
