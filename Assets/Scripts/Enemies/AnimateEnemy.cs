@@ -15,6 +15,7 @@ public class AnimateEnemy : MonoBehaviour
         _enemy.MovementByVelocityEvent.OnMovementByVelocity += MovementByVelocityEvent_OnMovementByVelocity;
         _enemy.IdleEvent.OnIdle += OnIdleEvent_OnIdle;
         _enemy.EnemyDieEvent.OnEnemyDie += OnEnemyDieEvent_OnEnemyDie;
+        _enemy.EnemyDodgeEvent.OnEnemyDodge += OnEnemyDodgeEvent_OnEnemyDodge;
     }
 
     private void OnDisable()
@@ -22,6 +23,7 @@ public class AnimateEnemy : MonoBehaviour
         _enemy.MovementByVelocityEvent.OnMovementByVelocity -= MovementByVelocityEvent_OnMovementByVelocity;
         _enemy.IdleEvent.OnIdle -= OnIdleEvent_OnIdle;
         _enemy.EnemyDieEvent.OnEnemyDie -= OnEnemyDieEvent_OnEnemyDie;
+        _enemy.EnemyDodgeEvent.OnEnemyDodge -= OnEnemyDodgeEvent_OnEnemyDodge;
     }
 
     private void MovementByVelocityEvent_OnMovementByVelocity(MovementByVelocityEvent @event, MovementByVelocityEventArgs args)
@@ -43,4 +45,10 @@ public class AnimateEnemy : MonoBehaviour
         _enemy.Animator.SetBool(Settings.IsDying, true);
     }
 
+    private void OnEnemyDodgeEvent_OnEnemyDodge(EnemyDodgeEvent @event, EnemyDodgeEventArgs args)
+    {
+        _enemy.Animator.SetBool(Settings.IsDodging, true);
+        _enemy.Animator.SetBool(Settings.IsIdle, false);
+        _enemy.Animator.SetBool(Settings.IsMoving, false);
+    }
 }

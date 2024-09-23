@@ -9,7 +9,6 @@ public class Destroyed : MonoBehaviour
     private Enemy _enemy;
 
     private GameManager _gameManager => GameManager.Instance;
-    private PoolManager _poolManager => PoolManager.Instance;
 
     private void Awake()
     {

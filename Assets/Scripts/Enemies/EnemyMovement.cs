@@ -114,17 +114,7 @@ public class EnemyMovement : MonoBehaviour
         {
             IsDodged = true;
 
-            _enemy.Rigidbody.velocity = Vector2.zero;
-
-            float dodgeVectorX = Random.Range(15f + Mathf.Epsilon, 10f);
-            float dodgeVectorY = Random.Range(10f, 15f + Mathf.Epsilon);
-            Vector2 dodgeVector = new Vector3(dodgeVectorX, dodgeVectorY);
-
-            _enemy.Rigidbody.AddForce(dodgeVector * _dodgeThrust);
-
-            yield return new WaitForSeconds(_dodgeTime);
-
-            StaticEventHandler.CallCombatNotifiedEvent("ENEMY DODGED", 0.5f);
+            _enemy.EnemyDodgeEvent.CallEnemyDodgeEvent(_dodgeTime, _dodgeThrust);
         }
         else
         {

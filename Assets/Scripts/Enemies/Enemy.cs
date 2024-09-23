@@ -13,6 +13,8 @@ using UnityEngine;
 [RequireComponent(typeof(IdleEvent))]
 [RequireComponent(typeof(MovementByVelocity))]
 [RequireComponent(typeof(MovementByVelocityEvent))]
+[RequireComponent(typeof(EnemyDodge))]
+[RequireComponent(typeof(EnemyDodgeEvent))]
 [RequireComponent(typeof(EnemyDie))]
 [RequireComponent(typeof(EnemyDieEvent))]
 [DisallowMultipleComponent]
@@ -26,6 +28,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public IdleEvent IdleEvent;
     [HideInInspector] public MovementByVelocityEvent MovementByVelocityEvent;
     [HideInInspector] public EnemyDieEvent EnemyDieEvent;
+    [HideInInspector] public EnemyDodgeEvent EnemyDodgeEvent;
     [HideInInspector] public Animator Animator;
 
     private void Awake()
@@ -38,6 +41,7 @@ public class Enemy : MonoBehaviour
         IdleEvent = GetComponent<IdleEvent>();
         MovementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         EnemyDieEvent = GetComponent<EnemyDieEvent>();
+        EnemyDodgeEvent = GetComponent<EnemyDodgeEvent>();
     }
     
     private void OnEnable()
