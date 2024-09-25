@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     public int StartingHealth { get; private set; }
     public int MaxHealth { get; private set; }
-    private int _currentHealth;
+    public int CurrentHealth { get; private set; }
     private HealthEvent _healthEvent;
     private Player _player;
     private float _levelUpMultiplier = 0.6f;
@@ -41,7 +41,7 @@ public class Health : MonoBehaviour
     private void LevelUpEvent_OnLevelUpEvent(LevelUpEvent @event, LevelUpEventArgs args)
     {
         MaxHealth = Mathf.RoundToInt(StartingHealth * args.PlayerLevel * _levelUpMultiplier);
-        _currentHealth = MaxHealth;
+        CurrentHealth = MaxHealth;
 
         CallHealthEvent(0);
     }
@@ -50,7 +50,7 @@ public class Health : MonoBehaviour
     {
         if (_player != null || Enemy != null)
         {
-            _currentHealth -= damageAmount;
+            CurrentHealth -= damageAmount;
             
             CallHealthEvent(damageAmount);
         }
@@ -58,13 +58,25 @@ public class Health : MonoBehaviour
 
     private void CallHealthEvent(int damageAmount)
     {
-        _healthEvent.CallHealthChangedEvent((float)_currentHealth / MaxHealth, _currentHealth, damageAmount);
+        _healthEvent.CallHealthChangedEvent((float)CurrentHealth / MaxHealth, CurrentHealth, damageAmount);
     }
 
     public void SetStartingHealth(int startingHealth)
     {  
         StartingHealth = startingHealth;
-        _currentHealth = StartingHealth;  
+        CurrentHealth = StartingHealth;  
         MaxHealth = startingHealth;
+    }
+
+    public void AddHealth(int healthPercent)
+    {
+        int healthIncrease = Mathf.RoundToInt(MaxHealth * healthPercent / 100);
+        int totalHealth = CurrentHealth + healthIncrease;
+
+        totalHealth = Mathf.Clamp(totalHealth, 0, MaxHealth);
+
+        CurrentHealth = totalHealth;
+
+        CallHealthEvent(0);
     }
 }

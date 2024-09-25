@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerDetailsSO : ScriptableObject
 {
     public GameObject Prefab;
+    public WeaponDetailsSO StartingWeaponDetails;
     public string Name;
     public float Speed;
     public int Health;

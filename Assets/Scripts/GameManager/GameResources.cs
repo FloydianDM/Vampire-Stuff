@@ -20,4 +20,13 @@ public class GameResources : MonoBehaviour
     [Header("Player")]
     public PlayerDetailsSO CurrentPlayerDetails;
 
+    [Header("Chest Item")]
+    public GameObject ChestItemPrefab;
+
+    [Header("Health")]
+    public Sprite HeartIconSprite;
+    
+    [Header("XP")]
+    public Sprite XPIconSprite;
+
 }

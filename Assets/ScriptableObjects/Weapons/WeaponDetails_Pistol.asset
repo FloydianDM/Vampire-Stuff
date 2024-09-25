@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcbe347b30ea444da1b6233e8b80b20, type: 3}
   m_Name: WeaponDetails_Pistol
   m_EditorClassIdentifier: 
+  Weapon: {fileID: 6430342368018559191, guid: 31e944a46f372c4438bf45a14f10b0db, type: 3}
   Name: Pistol
   Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   WeaponAmmo: {fileID: 11400000, guid: f5fe6b04386a7b843b46e7d4f7cac6cf, type: 2}

@@ -10,3 +10,11 @@ public enum GameState
     Play,
     PauseMenu
 }
+
+public enum ChestState
+{
+    Closed,
+    HealthItem,
+    WeaponItem,
+    XP
+}

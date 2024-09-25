@@ -47,13 +47,37 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         gameObject.tag = Settings.SPAWNED_ENEMY_TAG;
+
         _healthEvent.OnHealthChanged += HealthEvent_OnHealthChanged;
+        StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
     }
 
     private void OnDisable()
     {
         gameObject.tag = Settings.ENEMY_TAG;
+
         _healthEvent.OnHealthChanged -= HealthEvent_OnHealthChanged;
+        StaticEventHandler.OnGameStateChanged -= StaticEventHandler_OnGameStateChanged;
+    }
+
+    private void HealthEvent_OnHealthChanged(HealthEvent @event, HealthEventArgs args)
+    {
+        if (args.HealthAmount <= 0)
+        {
+            DestroyEnemy();
+        }
+    }
+
+    private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
+    {
+        if (args.GameState == GameState.PauseMenu)
+        {
+            Animator.enabled = false;
+        }
+        else if (args.GameState == GameState.Play)
+        {
+            Animator.enabled = true;
+        }
     }
 
     public void InitialiseEnemy(Vector2 spawnPosition)
@@ -63,14 +87,6 @@ public class Enemy : MonoBehaviour
         transform.position = spawnPosition;
 
         SetEnemyStartingHealth();
-    }
-
-    private void HealthEvent_OnHealthChanged(HealthEvent @event, HealthEventArgs args)
-    {
-        if (args.HealthAmount <= 0)
-        {
-            DestroyEnemy();
-        }
     }    
 
     private void SetEnemyStartingHealth()

@@ -19,6 +19,7 @@ public class PlayerControls : MonoBehaviour
 
         _vampireStuffInputActions.Player.Move.performed += OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled += OnPlayerMoveCanceled;
+        _vampireStuffInputActions.Player.Use.performed += OnPlayerUsePerformed;
 
         StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
     }
@@ -29,6 +30,7 @@ public class PlayerControls : MonoBehaviour
 
         _vampireStuffInputActions.Player.Move.performed -= OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled -= OnPlayerMoveCanceled;
+        _vampireStuffInputActions.Player.Use.performed -= OnPlayerUsePerformed;
 
         StaticEventHandler.OnGameStateChanged -= StaticEventHandler_OnGameStateChanged;
     }
@@ -72,7 +74,12 @@ public class PlayerControls : MonoBehaviour
     {
         _movement = Vector2.zero;
     }
-    
+
+    private void OnPlayerUsePerformed(InputAction.CallbackContext context)
+    {
+        UseItemInput();
+    }
+
     private void MovementInput()
     {
         _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.PlayerDetails.Speed, _movement);
@@ -80,6 +87,23 @@ public class PlayerControls : MonoBehaviour
         if (_movement == Vector2.zero)
         {
             _player.IdleEvent.CallIdleEvent();
+        }
+    }
+
+    private void UseItemInput()
+    {
+        float useItemRadius = 2f;
+
+        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(_player.GetPlayerPosition(), useItemRadius);
+
+        foreach (Collider2D item in collider2DArray)
+        {
+            IUsable iUsable = item.GetComponent<IUsable>();
+
+            if (iUsable != null)
+            {
+                iUsable.UseItem();
+            }
         }
     }
 

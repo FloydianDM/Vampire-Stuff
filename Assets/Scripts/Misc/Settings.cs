@@ -30,6 +30,7 @@ public static class Settings
     public static int IsIdle = Animator.StringToHash("isIdle");
     public static int IsDying = Animator.StringToHash("isDying");
     public static int IsDodging = Animator.StringToHash("isDodging");
+    public static int IsUsing = Animator.StringToHash("isUsing");
 
     #endregion
     

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6643ce2292548cc4fb21b686ac85eba4, type: 3}
-  m_Name: PlayerDetails_1
+  m_Name: PlayerDetails_Wanderer
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5928800737590958315, guid: 76b2f6214debb9a4aa0d55bac4b1f542, type: 3}
-  Name: 
+  StartingWeaponDetails: {fileID: 11400000, guid: cdfae411743404842b051a645d45f1c1, type: 2}
+  Name: Wanderer
   Speed: 4
   Health: 100

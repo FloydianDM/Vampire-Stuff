@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Weapon))]
 [DisallowMultipleComponent]
 public class FireWeapon : MonoBehaviour
 {
@@ -8,16 +9,14 @@ public class FireWeapon : MonoBehaviour
     private Weapon _weapon;
     private Player _player;
     private bool _shouldFire = true;
-    private PoolManager _poolManager => PoolManager.Instance;
 
-    private void Awake()
-    {
-        _weapon = GetComponent<Weapon>();
-    }
+    private PoolManager _poolManager => PoolManager.Instance;
+    private GameManager _gameManager => GameManager.Instance;
 
     private void Start()
     {
-        _player = GameObject.FindGameObjectWithTag(Settings.PLAYER_TAG).GetComponent<Player>();
+        _player = _gameManager.Player;
+        _weapon = GetComponent<Weapon>();
     }
 
     private void OnEnable()

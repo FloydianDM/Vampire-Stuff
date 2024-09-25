@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8312207400758869573}
-  - component: {fileID: 2112667681374058766}
-  - component: {fileID: 1408175283966295849}
   m_Layer: 0
   m_Name: WeaponPosition
   m_TagString: Untagged
@@ -33,33 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 941157274924650472}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2112667681374058766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415352607974099222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8702c1573b3f609448ace96630c33a86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1408175283966295849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415352607974099222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c72d81845efce42bcaf9c66e71f050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponDetails: {fileID: 11400000, guid: cdfae411743404842b051a645d45f1c1, type: 2}
-  WeaponListPosition: 0
-  ShootPosition: {fileID: 8312207400758869573}
 --- !u!1 &5928800737590958315
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: c81592a504ef4f44685eb15ce62be56d, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -261,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8121b5fc3150414f88ecaddbb4a37e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponTransform: {fileID: 8312207400758869573}
   PlayerControls: {fileID: 0}
   MovementToVelocityEvent: {fileID: 0}
   PlayerDetails: {fileID: 0}
@@ -271,6 +243,8 @@ MonoBehaviour:
   PlayerLevelManager: {fileID: 0}
   LevelUpEvent: {fileID: 0}
   Animator: {fileID: 0}
+  WeaponList: []
+  Health: {fileID: 0}
 --- !u!114 &2250984322768080538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee044df3d6d655c4eaff8df1b1f88639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xpThreshold: 100
+  _xpThreshold: 50
 --- !u!114 &931068924312645821
 MonoBehaviour:
   m_ObjectHideFlags: 0
