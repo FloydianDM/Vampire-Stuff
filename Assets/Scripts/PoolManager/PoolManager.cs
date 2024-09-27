@@ -111,6 +111,9 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
             case TypeEnum.EnemyDeathEffect:
                 type = typeof(EnemyDeathEffect);
                 break;
+            case TypeEnum.Usable:
+                type = typeof(IUsable);
+                break;
         }
 
         return type;

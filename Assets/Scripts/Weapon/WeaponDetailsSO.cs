@@ -9,4 +9,5 @@ public class WeaponDetailsSO : ScriptableObject
     public AmmoDetailsSO WeaponAmmo;
     public float FireRate;
     public bool IsAimable;
+    public bool isFieldEffect;
 }

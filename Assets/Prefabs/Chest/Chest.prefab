@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 1177678954073964422}
   - component: {fileID: 2496954917107348766}
   - component: {fileID: 2515951130398101930}
-  m_Layer: 0
+  - component: {fileID: 3157398593691823017}
+  m_Layer: 8
   m_Name: Chest
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,6 +168,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSpawnPoint: {fileID: 7960900771881861970}
+  Animator: {fileID: 0}
+--- !u!114 &3157398593691823017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957272666958494470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053c2815bfccc744586c909aa0cad4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4750041351821685242
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7960900771881861970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ItemSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

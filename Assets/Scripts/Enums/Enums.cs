@@ -1,6 +1,7 @@
 public enum TypeEnum
 {
     Fireable,
+    Usable,
     Enemy,
     EnemyDeathEffect,
 }

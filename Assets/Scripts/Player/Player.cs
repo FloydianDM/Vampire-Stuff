@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -112,6 +111,7 @@ public class Player : MonoBehaviour
 
         WeaponList.Add(weapon);
         weapon.WeaponListPosition = WeaponList.Count;
+        Instantiate(weapon, WeaponTransform);
     }
 
     public bool IsWeaponHeldByPlayer(WeaponDetailsSO weaponDetails)

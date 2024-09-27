@@ -15,5 +15,5 @@ MonoBehaviour:
   Prefab: {fileID: 5928800737590958315, guid: 76b2f6214debb9a4aa0d55bac4b1f542, type: 3}
   StartingWeaponDetails: {fileID: 11400000, guid: cdfae411743404842b051a645d45f1c1, type: 2}
   Name: Wanderer
-  Speed: 4
+  Speed: 6
   Health: 100

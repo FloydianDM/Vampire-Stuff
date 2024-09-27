@@ -26,7 +26,10 @@ GameObject:
   - component: {fileID: 6799192949162206611}
   - component: {fileID: 8759305582793627821}
   - component: {fileID: 2739525047959022184}
-  m_Layer: 0
+  - component: {fileID: 1378139813157637095}
+  - component: {fileID: 1206971249551568697}
+  - component: {fileID: 2613447806999994773}
+  m_Layer: 6
   m_Name: Enemy_Commoner_Orange
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -195,6 +198,7 @@ MonoBehaviour:
   IdleEvent: {fileID: 0}
   MovementByVelocityEvent: {fileID: 0}
   EnemyDieEvent: {fileID: 0}
+  EnemyDodgeEvent: {fileID: 0}
   Animator: {fileID: 0}
 --- !u!114 &1242850037118764709
 MonoBehaviour:
@@ -344,6 +348,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbba759b3213db94b8097e267289fd81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1378139813157637095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109579872958177463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2400e9c3e5eb6b46b4ab3d19eca9181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1206971249551568697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109579872958177463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d0af0f144627e49b46b8adee373918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2613447806999994773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109579872958177463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df94924a3da4ba4791f62ae048a7c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3874949698835134632
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5867628845625986951}
   - component: {fileID: 2586523157351823693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

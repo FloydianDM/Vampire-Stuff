@@ -113,6 +113,7 @@ public class FireWeapon : MonoBehaviour
 
             Vector2 weaponAimDirectionVector = new Vector2();
             bool isAmmoSet;
+            bool isFieldEffect;
 
             if (_weapon.WeaponDetails.IsAimable)
             {
@@ -120,6 +121,7 @@ public class FireWeapon : MonoBehaviour
                 Enemy closestEnemy = null;
                 EnemyFinder enemyFinder = _player.GetComponent<EnemyFinder>();
                 closestEnemy = enemyFinder.FindClosestEnemy();
+                isFieldEffect = false;
                 
                 if (closestEnemy != null)
                 {
@@ -134,14 +136,23 @@ public class FireWeapon : MonoBehaviour
                     isAmmoSet = false;
                 }
             }
+            else if (_weapon.WeaponDetails.isFieldEffect)
+            {
+                // grow the ammo game object
+                weaponAimDirectionVector = Vector2.down;
+                isFieldEffect = true;
+                isAmmoSet = true;
+
+            }
             else
             {
                 // choose random direction
                 weaponAimDirectionVector = ChooseRandomDirection(weaponAimDirectionVector);
                 isAmmoSet = true;
+                isFieldEffect = false;
             }
 
-            fireableAmmo.InitialiseAmmo(ammo, ammoSpeed, ammoRange, weaponAimDirectionVector, isAmmoSet);
+            fireableAmmo.InitialiseAmmo(ammo, ammoSpeed, ammoRange, weaponAimDirectionVector, isAmmoSet, isFieldEffect);
 
             yield return new WaitForSeconds(ammoSpawnInterval);     
         }

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f94b51c8c94b127438de8d3002dbd4f3, type: 3}
-  m_Name: AmmoDetails_Bullet
+  m_Name: AmmoDetails_Garlic
   m_EditorClassIdentifier: 
-  Name: Bullet
-  Prefab: {fileID: 4389202041880086128, guid: c2594d3382d180a4b83f57b4202365a7, type: 3}
-  SpeedMin: 7
-  SpeedMax: 10
-  DamageMin: 14
-  DamageMax: 20
-  RangeMin: 5
-  RangeMax: 15
+  Name: Garlic
+  Prefab: {fileID: 4424419932862306685, guid: 837fc25ed43da704e900644f85f616b0, type: 3}
+  SpeedMin: 3
+  SpeedMax: 4
+  DamageMin: 4
+  DamageMax: 5
+  RangeMin: 4
+  RangeMax: 6
   RotationSpeed: 0
   SpawnAmountMin: 1
   SpawnAmountMax: 1

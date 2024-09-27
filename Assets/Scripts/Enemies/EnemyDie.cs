@@ -9,6 +9,7 @@ public class EnemyDie : MonoBehaviour
     private EnemyDieEvent _enemyDieEvent;
 
     private PoolManager _poolManager => PoolManager.Instance;
+    private EnemySpawner _enemySpawner => EnemySpawner.Instance;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class EnemyDie : MonoBehaviour
         
         enemyDeathEffect.InitialiseEnemyDeathEffect(transform.position);
         enemyDeathEffect.PlayEnemyDeathEffect();
+        _enemySpawner.ReduceEnemyCount();
 
         gameObject.SetActive(false);
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6991235335127715820}
   - component: {fileID: 8985015101310882897}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ChestItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7787843741828460048}
   - component: {fileID: 3237943191522849006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 3243682280301236439}
   - component: {fileID: 8659026652124682480}
   - component: {fileID: 7477920073543901096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TextTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}

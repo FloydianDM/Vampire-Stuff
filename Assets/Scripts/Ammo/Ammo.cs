@@ -10,8 +10,10 @@ public class Ammo : MonoBehaviour, IFireable
     private float _ammoSpeed;
     private float _ammoRange;
     private Vector2 _fireDirectionVector;
+    private Vector3 _fieldEffectGrowMultiplier = new Vector3(0.05f, 0.05f, 0);
     private bool _isColliding;
     private bool _isAmmoSet;
+    private bool _isFieldEffect;
     private bool _shouldMove = true;
 
     private void OnEnable()
@@ -43,11 +45,19 @@ public class Ammo : MonoBehaviour, IFireable
             return;
         }
 
-        Vector2 distanceVector = _fireDirectionVector * (_ammoSpeed * Time.deltaTime);
+        if (!_isFieldEffect)
+        {
+            Vector2 distanceVector = _fireDirectionVector * (_ammoSpeed * Time.deltaTime);
 
-        transform.position += (Vector3)distanceVector;
+            transform.position += (Vector3)distanceVector;
 
-        _ammoRange -= distanceVector.magnitude;
+            _ammoRange -= distanceVector.magnitude;
+        }
+        else
+        {
+            gameObject.transform.localScale += _ammoSpeed * _fieldEffectGrowMultiplier;
+            _ammoRange -= Time.deltaTime;
+        }
 
         if (_ammoRange < 0)
         {
@@ -55,7 +65,8 @@ public class Ammo : MonoBehaviour, IFireable
         }
     }
 
-    public void InitialiseAmmo(AmmoDetailsSO ammoDetails, float ammoSpeed, float ammoRange, Vector2 fireDirectionVector, bool isAmmoSet)
+    public void InitialiseAmmo(
+        AmmoDetailsSO ammoDetails, float ammoSpeed, float ammoRange, Vector2 fireDirectionVector, bool isAmmoSet, bool isFieldEffect)
     {
         _ammoDetails = ammoDetails;
         _isColliding = false;
@@ -63,6 +74,7 @@ public class Ammo : MonoBehaviour, IFireable
         _ammoSpeed = ammoSpeed;
         _ammoRange = ammoRange;
         _isAmmoSet = isAmmoSet;
+        _isFieldEffect = isFieldEffect;
         _fireDirectionVector = fireDirectionVector;
 
         if (!_isAmmoSet)

@@ -7,16 +7,16 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IUsable
 {
     [SerializeField] private Transform _itemSpawnPoint;
-    [SerializeField] private WeaponDetailsSO _weaponDetails1;
 
     private SpriteRenderer _spriteRenderer;
     private AnimateChest _animateChest;
+    private ChestDetailsSO _chestDetails;
     private GameObject _chestItemGameObject;
     private ChestItem _chestItem;
     private ChestState _chestState = ChestState.Closed;
     private int _healthPercent;
     private WeaponDetailsSO _weaponDetails;
-    private int _addedXP = 20;
+    private int _addedXP;
     private bool _isChestEnabled = false;
     [HideInInspector] public Animator Animator;
 
@@ -28,20 +28,21 @@ public class Chest : MonoBehaviour, IUsable
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Animator = GetComponent<Animator>();
         _animateChest = GetComponent<AnimateChest>();
-
-        InitializeChest(15, _weaponDetails1); // temp
     }
 
-    public void InitializeChest(int healthPercent, WeaponDetailsSO weaponDetails)
+    public void InitializeUsable(ChestDetailsSO chestDetails)
     {
-        _healthPercent = healthPercent;
-        _weaponDetails = weaponDetails;
+        _chestDetails = chestDetails;
+        _healthPercent = chestDetails.HealthPercent;
+        _weaponDetails = chestDetails.WeaponDetails;
+        _addedXP = chestDetails.AddedXP;
 
         EnableChest();
     }
 
     private void EnableChest()
     {
+        gameObject.SetActive(true);
         _isChestEnabled = true;
     }
 

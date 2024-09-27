@@ -3,16 +3,16 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [DisallowMultipleComponent]
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private Transform[] _spawnPositionArray;
     [SerializeField] private GameObject[] _enemyPrefabArray;
+    [SerializeField] private int _enemiesToSpawn = 1000;
 
-    private int _enemiesToSpawn = 1000;
+    private int _maxEnemySpawn = 1000;
+    private int _spawnedEnemyCount;
     private float _timeBetweenSpawns = 1.8f;
     private float _spawnTimeModifier = 0.1f;
-    private int _currentEnemyCount;
-    private int _enemiesSpawnedSoFar;
     private bool _shouldSpawn = true;
 
     private PoolManager _poolManager => PoolManager.Instance;
@@ -65,29 +65,48 @@ public class EnemySpawner : MonoBehaviour
     {
         if (_spawnPositionArray.Length > 0)
         {
-            for (int i = 0; i < _enemiesToSpawn; i++)
+            while (true)
             {
-                while (!_shouldSpawn)
+                if (_spawnedEnemyCount < _enemiesToSpawn)
+                {
+                    while (!_shouldSpawn)
+                    {
+                        yield return null;
+                    }
+
+                    Vector2 spawnPosition = _spawnPositionArray[Random.Range(0, _spawnPositionArray.Length)].position;
+                    GameObject enemyPrefab = _enemyPrefabArray[Random.Range(0, _enemyPrefabArray.Length)];
+
+                    CreateEnemy(enemyPrefab, spawnPosition);
+
+                    yield return new WaitForSeconds(_timeBetweenSpawns);
+                }
+                else
                 {
                     yield return null;
                 }
-
-                Vector2 spawnPosition = _spawnPositionArray[Random.Range(0, _spawnPositionArray.Length)].position;
-                GameObject enemyPrefab = _enemyPrefabArray[Random.Range(0, _enemyPrefabArray.Length)];
-
-                CreateEnemy(enemyPrefab, spawnPosition);
-
-                yield return new WaitForSeconds(_timeBetweenSpawns);
-            }
+            }    
         }
     }
 
     private void CreateEnemy(GameObject enemyPrefab, Vector2 spawnPosition)
     {
-        _enemiesSpawnedSoFar++;
-        _currentEnemyCount++;
+        _spawnedEnemyCount++;
 
         Enemy enemy = (Enemy)_poolManager.ReuseComponent(enemyPrefab, spawnPosition, Quaternion.identity);
         enemy.InitialiseEnemy(spawnPosition);
+    }
+
+    public void ReduceEnemyCount()
+    {
+        _spawnedEnemyCount--;
+    }
+
+    public void IncreaseEnemySpawnNumber(int increasedNumber)
+    {
+        if (_enemiesToSpawn <= _maxEnemySpawn - increasedNumber)
+        {
+            _enemiesToSpawn += increasedNumber;
+        }
     }
 }
