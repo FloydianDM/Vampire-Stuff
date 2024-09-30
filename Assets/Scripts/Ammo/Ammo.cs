@@ -10,11 +10,13 @@ public class Ammo : MonoBehaviour, IFireable
     private float _ammoSpeed;
     private float _ammoRange;
     private Vector2 _fireDirectionVector;
-    private Vector3 _fieldEffectGrowMultiplier = new Vector3(0.05f, 0.05f, 0);
+    private Vector3 _fieldEffectAmmoGrowMultiplier = new Vector3(0.01f, 0.01f, 0);
     private bool _isColliding;
     private bool _isAmmoSet;
     private bool _isFieldEffect;
     private bool _shouldMove = true;
+
+    private GameManager _gameManager => GameManager.Instance;
 
     private void OnEnable()
     {
@@ -55,8 +57,11 @@ public class Ammo : MonoBehaviour, IFireable
         }
         else
         {
-            gameObject.transform.localScale += _ammoSpeed * _fieldEffectGrowMultiplier;
+            gameObject.transform.localScale += _ammoSpeed * _fieldEffectAmmoGrowMultiplier;
+
             _ammoRange -= Time.deltaTime;
+
+            transform.position = _gameManager.Player.GetPlayerPosition();
         }
 
         if (_ammoRange < 0)
@@ -100,7 +105,11 @@ public class Ammo : MonoBehaviour, IFireable
         }
 
         DealDamage(other);
-        DisableAmmo();
+
+        if (!_isFieldEffect)
+        {
+            DisableAmmo();
+        }
     }
 
     private void DisableAmmo()

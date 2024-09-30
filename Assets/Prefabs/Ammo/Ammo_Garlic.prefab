@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -981582683, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
+    - target: {fileID: 2443702783225984994, guid: 1ed0910522b34aa43a765e99b32fc9b1, type: 3}
+      propertyPath: m_Color.a
+      value: 0.41960785
+      objectReference: {fileID: 0}
     - target: {fileID: 4389202041880086128, guid: 1ed0910522b34aa43a765e99b32fc9b1, type: 3}
       propertyPath: m_Name
       value: Ammo_Garlic

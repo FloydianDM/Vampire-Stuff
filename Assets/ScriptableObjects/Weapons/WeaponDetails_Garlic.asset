@@ -16,6 +16,6 @@ MonoBehaviour:
   Name: Garlic
   Sprite: {fileID: 743180618, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
   WeaponAmmo: {fileID: 11400000, guid: e36ecbe6f4121664d985c0a6a6580c76, type: 2}
-  FireRate: 1
+  FireRate: 1.5
   IsAimable: 0
   isFieldEffect: 1
