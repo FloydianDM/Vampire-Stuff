@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public EnemyDetailsSO EnemyDetails;
     private Health _health;
     private HealthEvent _healthEvent;
+    private SpriteRenderer _spriteRenderer;
     [HideInInspector] public EnemyMovement EnemyMovement;
     [HideInInspector] public Rigidbody2D Rigidbody;
     [HideInInspector] public IdleEvent IdleEvent;
@@ -33,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Animator = GetComponent<Animator>();
         _health = GetComponent<Health>();
         _healthEvent = GetComponent<HealthEvent>();
@@ -42,6 +44,9 @@ public class Enemy : MonoBehaviour
         MovementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         EnemyDieEvent = GetComponent<EnemyDieEvent>();
         EnemyDodgeEvent = GetComponent<EnemyDodgeEvent>();
+
+        _spriteRenderer.sprite = EnemyDetails.Sprite;
+        _spriteRenderer.color = EnemyDetails.SpriteColor;
     }
     
     private void OnEnable()

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : SingletonMonobehaviour<PoolManager>
-{ 
-    [SerializeField] private Pool[] _poolArray;
+{
+    [SerializeField] private List<Pool> _poolList;
 
     private Transform _objectPoolTransform;
     private Dictionary<int, Queue<Component>> _poolDictionary = new Dictionary<int, Queue<Component>>();
@@ -21,9 +21,9 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
     {
         _objectPoolTransform = gameObject.transform;
 
-        for (int i = 0; i < _poolArray.Length; i++)
+        for (int i = 0; i < _poolList.Count; i++)
         {
-            CreatePool(_poolArray[i]);
+            CreatePool(_poolList[i]);
         }
     }
 

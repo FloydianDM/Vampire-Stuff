@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,6 +8,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private Transform[] _spawnPositionArray;
     [SerializeField] private GameObject[] _enemyPrefabArray;
+    public List<GameObject> EnemyPrefabList;
     [SerializeField] private int _enemiesToSpawn = 1000;
 
     private int _maxEnemySpawn = 1000;
@@ -75,7 +77,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
                     }
 
                     Vector2 spawnPosition = _spawnPositionArray[Random.Range(0, _spawnPositionArray.Length)].position;
-                    GameObject enemyPrefab = _enemyPrefabArray[Random.Range(0, _enemyPrefabArray.Length)];
+                    GameObject enemyPrefab = EnemyPrefabList[Random.Range(0, EnemyPrefabList.Count)];
 
                     CreateEnemy(enemyPrefab, spawnPosition);
 

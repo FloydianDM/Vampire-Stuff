@@ -1,16 +1,30 @@
 using UnityEngine;
 using UnityEditor;
+using System;
+using Unity.Properties;
+using TMPro;
 
 // editor for creating enemy details SOs
 public class EnemyEditorWindow : EditorWindow
 {
+    #region Prefabs
+    private GameObject _basePrefab;
+    private GameObject _newPrefabVariant;
+    private string _newPrefabVariantName;
+    private GameObject _enemySpawnerPrefab;
+    private SerializedObject _serializedEnemySpawner;
+    private SerializedProperty _enemyPrefabListProp;
+    #endregion
+
+    #region Scriptable Objects
     private string _enemyType;
     private string _assetPath = "Assets/ScriptableObjects/Enemies/";
     private EnemyDetailsSO _newEnemyDetails;
     private EnemyDetailsSO _selectedEnemyDetails;
-    private SerializedObject _serializedObject;
+    private SerializedObject _serializedScriptableObject;
     private SerializedProperty _typeProp;
-    private SerializedProperty _enemyPrefabProp;
+    private SerializedProperty _spriteProp;
+    private SerializedProperty _spriteColorProp;
     private SerializedProperty _speedMinProp;
     private SerializedProperty _speedMaxProp;
     private SerializedProperty _dodgeThrustProp;
@@ -21,6 +35,7 @@ public class EnemyEditorWindow : EditorWindow
     private SerializedProperty _awarenessProp;
     private SerializedProperty _agilityProp;
     private SerializedProperty _enemyDeathEffect;
+    #endregion
 
     [MenuItem("Tools/Enemy Creator")]
     private static void ShowWindow()
@@ -36,24 +51,39 @@ public class EnemyEditorWindow : EditorWindow
 
         // create enemy section
 
-        GUILayout.Label("Create Enemy Details Scriptable Object", EditorStyles.boldLabel);
+        GUILayout.Label("Create An Enemy", EditorStyles.boldLabel);
 
+        _basePrefab = (GameObject)EditorGUILayout.ObjectField("Select Base Enemy Prefab", _basePrefab, typeof(GameObject), false);
         _enemyType = EditorGUILayout.TextField("Type", _enemyType);
+        _enemySpawnerPrefab = (GameObject)EditorGUILayout.ObjectField(
+            "Select Enemy Spawner Prefab", _enemySpawnerPrefab, typeof(GameObject), false);
 
-        if (GUILayout.Button("Create Enemy Details Scriptable Object"))
+        if (GUILayout.Button("Create New Enemy"))
         {
-            CreateScriptableObject();
+            if (_basePrefab == null || _enemySpawnerPrefab == null)
+            {
+                GUIContent notificationWindow = new GUIContent("Please select a base enemy prefab and enemy spawner");
+                ShowNotification(notificationWindow);
+            }
+            else
+            {
+                CreateScriptableObject();
+            }
         }
 
         if (_newEnemyDetails != null)
         {
-            GUILayout.Label("New Fields", EditorStyles.boldLabel);
+            GUILayout.Label("Initialize Enemy Details", EditorStyles.boldLabel);
 
             InitializeScriptableObject();
 
             if (GUILayout.Button("Save Enemy Details Scriptable Object"))
             {
                 SaveScriptableObject();
+                CreatePrefabVariant();
+
+                // enemy spawner modification
+                SaveEnemySpawner();
             }
         }
 
@@ -85,8 +115,8 @@ public class EnemyEditorWindow : EditorWindow
     private void InitializeScriptableObject()
     {
         _newEnemyDetails.Type = _enemyType;
-        _newEnemyDetails.EnemyPrefab = (GameObject)EditorGUILayout.ObjectField(
-            "EnemyPrefab", _newEnemyDetails.EnemyPrefab, typeof(GameObject), false);
+        _newEnemyDetails.Sprite = (Sprite)EditorGUILayout.ObjectField("Sprite", _newEnemyDetails.Sprite, typeof(Sprite), false);
+        _newEnemyDetails.SpriteColor = EditorGUILayout.ColorField("Sprite Color", _newEnemyDetails.SpriteColor);
         _newEnemyDetails.SpeedMin = EditorGUILayout.FloatField("SpeedMin", _newEnemyDetails.SpeedMin);
         _newEnemyDetails.SpeedMax = EditorGUILayout.FloatField("SpeedMax", _newEnemyDetails.SpeedMax);
         _newEnemyDetails.DodgeThrust = EditorGUILayout.FloatField("DodgeThrust", _newEnemyDetails.DodgeThrust);
@@ -102,32 +132,36 @@ public class EnemyEditorWindow : EditorWindow
 
     private void EditScriptableObject()
     {
-        if (_serializedObject == null || _serializedObject.targetObject != _selectedEnemyDetails)
+        if (_serializedScriptableObject == null || _serializedScriptableObject.targetObject != _selectedEnemyDetails)
         {
             _newEnemyDetails = null; // to clear the create section
+            _enemyType = null; 
+            _basePrefab = null; 
 
-            _serializedObject = new SerializedObject(_selectedEnemyDetails);
+            _serializedScriptableObject = new SerializedObject(_selectedEnemyDetails);
 
             // get values from SO
 
-            _typeProp = _serializedObject.FindProperty("Type");
-            _enemyPrefabProp = _serializedObject.FindProperty("EnemyPrefab");
-            _speedMinProp = _serializedObject.FindProperty("SpeedMin");
-            _speedMaxProp = _serializedObject.FindProperty("SpeedMax");
-            _dodgeThrustProp = _serializedObject.FindProperty("DodgeThrust");
-            _healthMinProp = _serializedObject.FindProperty("HealthMin");
-            _healthMaxProp = _serializedObject.FindProperty("HealthMax");
-            _damageProp = _serializedObject.FindProperty("Damage");
-            _experienceDropProp = _serializedObject.FindProperty("ExperienceDrop");
-            _awarenessProp = _serializedObject.FindProperty("Awareness");
-            _agilityProp = _serializedObject.FindProperty("Agility");
-            _enemyDeathEffect = _serializedObject.FindProperty("EnemyDeathEffect");
+            _typeProp = _serializedScriptableObject.FindProperty("Type");
+            _spriteProp = _serializedScriptableObject.FindProperty("Sprite");
+            _spriteColorProp = _serializedScriptableObject.FindProperty("SpriteColor");
+            _speedMinProp = _serializedScriptableObject.FindProperty("SpeedMin");
+            _speedMaxProp = _serializedScriptableObject.FindProperty("SpeedMax");
+            _dodgeThrustProp = _serializedScriptableObject.FindProperty("DodgeThrust");
+            _healthMinProp = _serializedScriptableObject.FindProperty("HealthMin");
+            _healthMaxProp = _serializedScriptableObject.FindProperty("HealthMax");
+            _damageProp = _serializedScriptableObject.FindProperty("Damage");
+            _experienceDropProp = _serializedScriptableObject.FindProperty("ExperienceDrop");
+            _awarenessProp = _serializedScriptableObject.FindProperty("Awareness");
+            _agilityProp = _serializedScriptableObject.FindProperty("Agility");
+            _enemyDeathEffect = _serializedScriptableObject.FindProperty("EnemyDeathEffect");
         }
 
-        _serializedObject.Update();
+        _serializedScriptableObject.Update();
 
         EditorGUILayout.PropertyField(_typeProp);
-        EditorGUILayout.PropertyField(_enemyPrefabProp);
+        EditorGUILayout.PropertyField(_spriteProp);
+        EditorGUILayout.PropertyField(_spriteColorProp);
         EditorGUILayout.PropertyField(_speedMinProp);
         EditorGUILayout.PropertyField(_speedMaxProp);
         EditorGUILayout.PropertyField(_dodgeThrustProp);
@@ -139,7 +173,7 @@ public class EnemyEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(_agilityProp);
         EditorGUILayout.PropertyField(_enemyDeathEffect);
 
-        _serializedObject.ApplyModifiedProperties();
+        _serializedScriptableObject.ApplyModifiedProperties();
     }
 
     private void SaveScriptableObject()
@@ -167,4 +201,43 @@ public class EnemyEditorWindow : EditorWindow
         }
     }
 
+    private void CreatePrefabVariant()
+    {
+        _newPrefabVariantName = _enemyType;
+        _newPrefabVariant = (GameObject)PrefabUtility.InstantiatePrefab(_basePrefab); // temp
+        _newPrefabVariant.GetComponent<Enemy>().EnemyDetails = _newEnemyDetails;
+
+        SavePrefabVariant();
+    }
+
+    private void SavePrefabVariant()
+    {
+        string path = "Assets/Prefabs/Enemies/Enemy_" + _newPrefabVariantName + ".prefab";
+        path = AssetDatabase.GenerateUniqueAssetPath(path);
+
+        GameObject newPrefab = PrefabUtility.SaveAsPrefabAssetAndConnect(_newPrefabVariant, path, InteractionMode.UserAction);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditEnemySpawner(newPrefab);
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = _newPrefabVariant;
+        DestroyImmediate(_newPrefabVariant); // clean temp
+    }
+
+    private void EditEnemySpawner(GameObject prefab)
+    {
+        EnemySpawner enemySpawner = _enemySpawnerPrefab.GetComponent<EnemySpawner>();
+        enemySpawner.EnemyPrefabList.Add(prefab);
+    }
+
+    private void SaveEnemySpawner()
+    {
+        if (_enemySpawnerPrefab != null)
+        {
+            EditorUtility.SetDirty(_enemySpawnerPrefab);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            EditorUtility.FocusProjectWindow();
+        }
+    }
 }

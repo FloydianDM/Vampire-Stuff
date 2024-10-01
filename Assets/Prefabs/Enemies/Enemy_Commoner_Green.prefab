@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6140aec772f17464c89afce60e8c58a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyDetails: {fileID: 11400000, guid: 8e0434988bb917d40b59c84a7fd8a3f8, type: 2}
+  EnemyDetails: {fileID: 11400000, guid: 1ac6126b6e5631141a5761d0f2899408, type: 2}
   EnemyMovement: {fileID: 0}
   Rigidbody: {fileID: 0}
   IdleEvent: {fileID: 0}

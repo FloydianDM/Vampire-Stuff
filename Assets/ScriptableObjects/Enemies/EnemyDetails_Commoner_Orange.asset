@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyDetails_Commoner_Orange
   m_EditorClassIdentifier: 
   Type: Commoner
-  EnemyPrefab: {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
+  Sprite: {fileID: 1186777860, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
+  SpriteColor: {r: 0.78431374, g: 0.35686275, b: 0.18039216, a: 1}
   SpeedMin: 3
   SpeedMax: 4.5
   DodgeThrust: 10

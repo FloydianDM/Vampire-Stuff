@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemyDetailsSO : ScriptableObject
 {
     public string Type;
-    public GameObject EnemyPrefab;
+    public Sprite Sprite;
+    public Color SpriteColor;
     public float SpeedMin;
     public float SpeedMax;
     public float DodgeThrust;
