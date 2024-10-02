@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEditor;
 using System;
-using Unity.Properties;
-using TMPro;
+using UnityEngine.Analytics;
 
 // editor for creating enemy details SOs
 public class EnemyEditorWindow : EditorWindow
 {
     #region Prefabs
     private GameObject _basePrefab;
-    private GameObject _newPrefabVariant;
+    private GameObject _tempPrefabVariant;
+    private GameObject _newPrefab;
     private string _newPrefabVariantName;
     private GameObject _enemySpawnerPrefab;
-    private SerializedObject _serializedEnemySpawner;
+    private EnemySpawner _enemySpawner;
+    private SerializedObject _serializedEnemySpawnerObject;
     private SerializedProperty _enemyPrefabListProp;
     #endregion
 
@@ -53,10 +54,18 @@ public class EnemyEditorWindow : EditorWindow
 
         GUILayout.Label("Create An Enemy", EditorStyles.boldLabel);
 
-        _basePrefab = (GameObject)EditorGUILayout.ObjectField("Select Base Enemy Prefab", _basePrefab, typeof(GameObject), false);
-        _enemyType = EditorGUILayout.TextField("Type", _enemyType);
-        _enemySpawnerPrefab = (GameObject)EditorGUILayout.ObjectField(
-            "Select Enemy Spawner Prefab", _enemySpawnerPrefab, typeof(GameObject), false);
+        //_basePrefab = (GameObject)EditorGUILayout.ObjectField("Select Base Enemy Prefab", _basePrefab, typeof(GameObject), false);
+        _enemyType = EditorGUILayout.TextField("Enemy Type", _enemyType);
+
+        if (_basePrefab == null)
+        {
+            _basePrefab = Resources.Load<GameObject>("Enemy");
+        }
+
+        if (_enemySpawnerPrefab == null)
+        {
+            _enemySpawnerPrefab = Resources.Load<GameObject>("EnemySpawner");
+        }
 
         if (GUILayout.Button("Create New Enemy"))
         {
@@ -81,12 +90,24 @@ public class EnemyEditorWindow : EditorWindow
             {
                 SaveScriptableObject();
                 CreatePrefabVariant();
+            }
+        }
+        
+        if (_newPrefab != null && _enemySpawner == null)
+        {
+            _enemySpawner = AddEnemyToEnemySpawner(_newPrefab);
+        }
 
-                // enemy spawner modification
+        if (_enemySpawner != null)
+        {
+            EditEnemySpawner(_enemySpawner);
+
+            if (GUILayout.Button("Save Enemy Spawner"))
+            {
                 SaveEnemySpawner();
             }
         }
-
+    
         GUILayout.Space(20);
 
         // edit enemy section
@@ -204,8 +225,8 @@ public class EnemyEditorWindow : EditorWindow
     private void CreatePrefabVariant()
     {
         _newPrefabVariantName = _enemyType;
-        _newPrefabVariant = (GameObject)PrefabUtility.InstantiatePrefab(_basePrefab); // temp
-        _newPrefabVariant.GetComponent<Enemy>().EnemyDetails = _newEnemyDetails;
+        _tempPrefabVariant = (GameObject)PrefabUtility.InstantiatePrefab(_basePrefab); // temp
+        _tempPrefabVariant.GetComponent<Enemy>().EnemyDetails = _newEnemyDetails;
 
         SavePrefabVariant();
     }
@@ -215,19 +236,38 @@ public class EnemyEditorWindow : EditorWindow
         string path = "Assets/Prefabs/Enemies/Enemy_" + _newPrefabVariantName + ".prefab";
         path = AssetDatabase.GenerateUniqueAssetPath(path);
 
-        GameObject newPrefab = PrefabUtility.SaveAsPrefabAssetAndConnect(_newPrefabVariant, path, InteractionMode.UserAction);
+        _newPrefab = PrefabUtility.SaveAsPrefabAssetAndConnect(_tempPrefabVariant, path, InteractionMode.UserAction);
+        
+        DestroyImmediate(_tempPrefabVariant);
+
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        EditEnemySpawner(newPrefab);
         EditorUtility.FocusProjectWindow();
-        Selection.activeObject = _newPrefabVariant;
-        DestroyImmediate(_newPrefabVariant); // clean temp
+        Selection.activeObject = _newPrefab;
     }
 
-    private void EditEnemySpawner(GameObject prefab)
+    private EnemySpawner AddEnemyToEnemySpawner(GameObject prefab)
     {
         EnemySpawner enemySpawner = _enemySpawnerPrefab.GetComponent<EnemySpawner>();
         enemySpawner.EnemyPrefabList.Add(prefab);
+
+        return enemySpawner;
+    }
+
+    private void EditEnemySpawner(EnemySpawner enemySpawner)
+    {
+        // TODO: show changes on GUI
+        if (_serializedEnemySpawnerObject == null || _serializedEnemySpawnerObject.targetObject != enemySpawner)
+        {
+            _serializedEnemySpawnerObject = new SerializedObject(enemySpawner);
+            _enemyPrefabListProp = _serializedEnemySpawnerObject.FindProperty("EnemyPrefabList");
+        }
+
+        _serializedEnemySpawnerObject.Update();
+
+        EditorGUILayout.PropertyField(_enemyPrefabListProp);
+
+        _serializedEnemySpawnerObject.ApplyModifiedProperties();
     }
 
     private void SaveEnemySpawner()

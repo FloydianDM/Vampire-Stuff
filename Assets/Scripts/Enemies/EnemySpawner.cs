@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private Transform[] _spawnPositionArray;
-    [SerializeField] private GameObject[] _enemyPrefabArray;
     public List<GameObject> EnemyPrefabList;
     [SerializeField] private int _enemiesToSpawn = 1000;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PoolEditorWindow : EditorWindow
 {
-    private PoolManager _poolManagerPrefab;
+    private GameObject _poolManagerPrefab;
     private SerializedObject _serializedPoolObject;
     private SerializedProperty _poolListProp;
 
@@ -21,7 +21,10 @@ public class PoolEditorWindow : EditorWindow
 
         GUILayout.Label("Pool Editor", EditorStyles.boldLabel);
 
-        _poolManagerPrefab = (PoolManager)EditorGUILayout.ObjectField("Pool Manager", _poolManagerPrefab, typeof(PoolManager), false);
+        if (_poolManagerPrefab == null)
+        {
+            _poolManagerPrefab = Resources.Load<GameObject>("PoolManager");
+        }
 
         if (_poolManagerPrefab != null)
         {
@@ -36,9 +39,11 @@ public class PoolEditorWindow : EditorWindow
 
     private void EditPoolManager()
     {
-        if (_serializedPoolObject == null || _serializedPoolObject.targetObject != _poolManagerPrefab)
+        PoolManager poolManager = _poolManagerPrefab.GetComponent<PoolManager>();
+        
+        if (_serializedPoolObject == null || _serializedPoolObject.targetObject != poolManager)
         {
-            _serializedPoolObject = new SerializedObject(_poolManagerPrefab);
+            _serializedPoolObject = new SerializedObject(poolManager);
 
             // get values from pool manager
             _poolListProp = _serializedPoolObject.FindProperty("_poolList");

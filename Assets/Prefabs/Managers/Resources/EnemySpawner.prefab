@@ -53,8 +53,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _enemyPrefabArray:
-  - {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
+  EnemyPrefabList:
   - {fileID: 109579872958177463, guid: ad2ede0e8100ecc43b7e327005594a52, type: 3}
-  EnemyPrefabList: []
+  - {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
   _enemiesToSpawn: 10
