@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System;
-using UnityEngine.Analytics;
 
 // editor for creating enemy details SOs
 public class EnemyEditorWindow : EditorWindow
@@ -54,7 +52,6 @@ public class EnemyEditorWindow : EditorWindow
 
         GUILayout.Label("Create An Enemy", EditorStyles.boldLabel);
 
-        //_basePrefab = (GameObject)EditorGUILayout.ObjectField("Select Base Enemy Prefab", _basePrefab, typeof(GameObject), false);
         _enemyType = EditorGUILayout.TextField("Enemy Type", _enemyType);
 
         if (_basePrefab == null)
