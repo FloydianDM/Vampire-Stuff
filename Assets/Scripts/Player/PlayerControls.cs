@@ -20,6 +20,7 @@ public class PlayerControls : MonoBehaviour
         _vampireStuffInputActions.Player.Move.performed += OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled += OnPlayerMoveCanceled;
         _vampireStuffInputActions.Player.Use.performed += OnPlayerUsePerformed;
+        _vampireStuffInputActions.Player.Detonate.performed += OnPlayerDetonatePerformed;
 
         StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
     }
@@ -31,6 +32,7 @@ public class PlayerControls : MonoBehaviour
         _vampireStuffInputActions.Player.Move.performed -= OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled -= OnPlayerMoveCanceled;
         _vampireStuffInputActions.Player.Use.performed -= OnPlayerUsePerformed;
+        _vampireStuffInputActions.Player.Detonate.performed -= OnPlayerDetonatePerformed;
 
         StaticEventHandler.OnGameStateChanged -= StaticEventHandler_OnGameStateChanged;
     }
@@ -78,6 +80,11 @@ public class PlayerControls : MonoBehaviour
     private void OnPlayerUsePerformed(InputAction.CallbackContext context)
     {
         UseItemInput();
+    }
+    
+    private void OnPlayerDetonatePerformed(InputAction.CallbackContext obj)
+    {
+        _player.BombOperator.OperateBomb();
     }
 
     private void MovementInput()
@@ -127,6 +134,5 @@ public class PlayerControls : MonoBehaviour
 
             _vampireStuffInputActions.Player.Disable();
         }
-
     }
 }
