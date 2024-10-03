@@ -19,10 +19,3 @@ public enum ChestState
     WeaponItem,
     XP
 }
-
-public enum UpgradeTypeEnum
-{
-    Bomb,
-    WeaponEnhancer,
-    Companion
-}

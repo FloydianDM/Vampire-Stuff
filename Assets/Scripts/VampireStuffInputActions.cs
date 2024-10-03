@@ -62,15 +62,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Detonate"",
-                    ""type"": ""Button"",
-                    ""id"": ""26c75760-2ea6-4489-be36-0371bd920abd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,17 +293,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Use"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a7e02459-9037-469f-aafc-a12cec5e8030"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Detonate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -924,7 +904,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
-        m_Player_Detonate = m_Player.FindAction("Detonate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1003,7 +982,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Use;
-    private readonly InputAction m_Player_Detonate;
     public struct PlayerActions
     {
         private @VampireStuffInputActions m_Wrapper;
@@ -1012,7 +990,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Use => m_Wrapper.m_Player_Use;
-        public InputAction @Detonate => m_Wrapper.m_Player_Detonate;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1034,9 +1011,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
-            @Detonate.started += instance.OnDetonate;
-            @Detonate.performed += instance.OnDetonate;
-            @Detonate.canceled += instance.OnDetonate;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1053,9 +1027,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
-            @Detonate.started -= instance.OnDetonate;
-            @Detonate.performed -= instance.OnDetonate;
-            @Detonate.canceled -= instance.OnDetonate;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1250,7 +1221,6 @@ public partial class @VampireStuffInputActions: IInputActionCollection2, IDispos
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
-        void OnDetonate(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

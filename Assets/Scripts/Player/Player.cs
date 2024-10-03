@@ -17,12 +17,10 @@ using UnityEngine;
 [RequireComponent(typeof(LevelUpEvent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AnimatePlayer))]
-[RequireComponent(typeof(BombOperator))]
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Transform _weaponTransform;
-    
+    [SerializeField] private Transform WeaponTransform;
     [HideInInspector] public PlayerControls PlayerControls;
     [HideInInspector] public MovementByVelocityEvent MovementToVelocityEvent;
     [HideInInspector] public PlayerDetailsSO PlayerDetails;
@@ -35,8 +33,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator Animator;
     [HideInInspector] public List<Weapon> WeaponList = new List<Weapon>();
     [HideInInspector] public Health Health;
-    [HideInInspector] public BombOperator BombOperator;
-    
+
     private void Awake()
     {
         PlayerControls = GetComponent<PlayerControls>();
@@ -49,7 +46,6 @@ public class Player : MonoBehaviour
         PlayerLevelManager = GetComponent<PlayerLevelManager>();
         LevelUpEvent = GetComponent<LevelUpEvent>();
         Animator = GetComponent<Animator>();
-        BombOperator = GetComponent<BombOperator>();
     }
 
     private void OnEnable()
@@ -100,7 +96,7 @@ public class Player : MonoBehaviour
     {
         WeaponList.Clear();
         WeaponList.Add(PlayerDetails.StartingWeaponDetails.Weapon);
-        Instantiate(PlayerDetails.StartingWeaponDetails.Weapon, _weaponTransform);
+        Instantiate(PlayerDetails.StartingWeaponDetails.Weapon, WeaponTransform);
     }
 
     private void DestroyPlayer()
@@ -115,7 +111,7 @@ public class Player : MonoBehaviour
 
         WeaponList.Add(weapon);
         weapon.WeaponListPosition = WeaponList.Count;
-        Instantiate(weapon, _weaponTransform);
+        Instantiate(weapon, WeaponTransform);
     }
 
     public bool IsWeaponHeldByPlayer(WeaponDetailsSO weaponDetails)
