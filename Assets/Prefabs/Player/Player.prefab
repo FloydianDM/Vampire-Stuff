@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 1228909234074166599}
   - component: {fileID: 5685992188175553069}
   - component: {fileID: 5844932027544531618}
+  - component: {fileID: 8800148757578438452}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8121b5fc3150414f88ecaddbb4a37e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponTransform: {fileID: 8312207400758869573}
+  _weaponTransform: {fileID: 8312207400758869573}
   PlayerControls: {fileID: 0}
   MovementToVelocityEvent: {fileID: 0}
   PlayerDetails: {fileID: 0}
@@ -245,6 +246,7 @@ MonoBehaviour:
   Animator: {fileID: 0}
   WeaponList: []
   Health: {fileID: 0}
+  BombOperator: {fileID: 0}
 --- !u!114 &2250984322768080538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +431,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ced1e4fe6276bd42bf51454ff940388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8800148757578438452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5928800737590958315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ccf9ea23d48d5c478fe5b39177c8e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bombUpgradePrefab: {fileID: 641554841933936102, guid: 2693876306264bd489ca1eeb5fd4eafa, type: 3}
+  HasBombInPocket: 0
 --- !u!1 &6716737026685624138
 GameObject:
   m_ObjectHideFlags: 0

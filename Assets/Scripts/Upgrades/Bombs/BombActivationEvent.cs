@@ -3,19 +3,11 @@ using UnityEngine;
 
 public class BombActivationEvent : MonoBehaviour
 {
-    public event Action<BombActivationEvent, BombActivationEventArgs> OnBombActivated;
+    public event Action<BombActivationEvent> OnBombActivated;
 
     public void CallBombActivationEvent()
     {
-        OnBombActivated?.Invoke(this, new BombActivationEventArgs()
-        {
-            
-        });
+        OnBombActivated?.Invoke(this);
     }
-    
-}
-
-public class BombActivationEventArgs : EventArgs
-{
     
 }

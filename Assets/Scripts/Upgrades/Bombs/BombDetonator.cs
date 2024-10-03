@@ -3,15 +3,20 @@ using UnityEngine;
 
 public class BombDetonator : MonoBehaviour
 {
+    [SerializeField] private LayerMask _destroyableLayerMask;
+    
     private float _bombCooldownTimer;
     private BombUpgrade _bombUpgrade;
-    private bool _canDetonate = false;
+    private bool _canDetonate;
     private bool _shouldStopTimer;
+    private float _effectTimeAdjuster = 2.5f;
+    
+    private GameResources _gameResources => GameResources.Instance;
 
-    private void Start()
+    private void Awake()
     {
         _bombUpgrade = GetComponent<BombUpgrade>();
-        _bombCooldownTimer = _bombUpgrade.BombUpgradeDetails.CooldownTime;
+        _bombCooldownTimer = _bombUpgrade.CooldownTime;
     }
 
     private void OnEnable()
@@ -33,19 +38,10 @@ public class BombDetonator : MonoBehaviour
             return;
         }
 
-        if (!_canDetonate)
-        {
-            _bombCooldownTimer -= Time.deltaTime;
-        }
-        
-        if (_bombCooldownTimer <= 0)
-        {
-            _canDetonate = true;
-            _bombCooldownTimer = _bombUpgrade.BombUpgradeDetails.CooldownTime;
-        }
+        BombTimer();
     }
 
-    private void BombActivationEvent_OnBombActivated(BombActivationEvent @event, BombActivationEventArgs args)
+    private void BombActivationEvent_OnBombActivated(BombActivationEvent @event)
     {
         DetonateBomb();
     }
@@ -61,18 +57,47 @@ public class BombDetonator : MonoBehaviour
             _shouldStopTimer = false;
         }
     }
+    
+    private void BombTimer()
+    {
+        if (!_canDetonate)
+        {
+            _bombCooldownTimer -= Time.deltaTime;
+        }
+
+        if (_bombCooldownTimer <= 0)
+        {
+            _canDetonate = true;
+            _bombCooldownTimer = _bombUpgrade.CooldownTime;
+        }
+    }
 
     private void DetonateBomb()
     {
+        if (!_canDetonate)
+        {
+            return;
+        }
+
         StartCoroutine(DetonateBombRoutine());
     }
 
     private IEnumerator DetonateBombRoutine()
     {
-        // TODO: write logic
+        Collider2D[] colliderArray = Physics2D.OverlapCircleAll(transform.position, _bombUpgrade.ImpactArea, _destroyableLayerMask);
         
+        foreach (Collider2D col in colliderArray)
+        {
+           col.GetComponent<Health>()?.TakeDamage(_bombUpgrade.Damage);
+        }
+
+        _canDetonate = false;
+
+        GameObject bombDetonationEffect = Instantiate(_gameResources.BombDetonationEffect, transform);
+        bombDetonationEffect.GetComponent<BombDetonationEffect>().PlayBombDetonationEffect();
         
+        yield return new WaitForSeconds(_effectTimeAdjuster);
         
-        yield return null;
+        Destroy(bombDetonationEffect);
     }
 }

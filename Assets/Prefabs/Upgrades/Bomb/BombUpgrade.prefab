@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2531892371708153830}
   - component: {fileID: 5849667509457536793}
+  - component: {fileID: 2051015531675302859}
+  - component: {fileID: 318674338761168011}
   m_Layer: 0
   m_Name: BombUpgrade
   m_TagString: Untagged
@@ -45,7 +47,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf0899e32782f24d9548e95d05dfac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BombUpgradeDetails: {fileID: 0}
+  _bombUpgradeDetails: {fileID: 0}
+  BombDetonator: {fileID: 0}
+  BombActivationEvent: {fileID: 0}
+  ImpactArea: 0
+  CooldownTime: 0
+  Damage: 0
+--- !u!114 &2051015531675302859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23222526457863991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05cf4fe393c2154eb7d07dd10d6ce9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyableLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &318674338761168011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23222526457863991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2310f5084edf741a56a2fbe7b7d069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3110934915621015511
 GameObject:
   m_ObjectHideFlags: 0

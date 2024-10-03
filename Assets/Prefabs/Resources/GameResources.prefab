@@ -48,3 +48,4 @@ MonoBehaviour:
   ChestItemPrefab: {fileID: 153021780919890351, guid: bb874882cb00cbd43b9c71c72558ca5c, type: 3}
   HeartIconSprite: {fileID: -805007507, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
   XPIconSprite: {fileID: -1019776640, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
+  BombDetonationEffect: {fileID: 417761080263594737, guid: c3abab0ce1a904340886da0153e0a2f5, type: 3}

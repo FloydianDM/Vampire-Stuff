@@ -82,8 +82,13 @@ public class PlayerControls : MonoBehaviour
         UseItemInput();
     }
     
-    private void OnPlayerDetonatePerformed(InputAction.CallbackContext obj)
+    private void OnPlayerDetonatePerformed(InputAction.CallbackContext context)
     {
+        if (!_player.BombOperator.HasBombInPocket)
+        {
+            return;
+        }
+
         _player.BombOperator.OperateBomb();
     }
 

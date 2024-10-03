@@ -24,5 +24,6 @@ public enum UpgradeTypeEnum
 {
     Bomb,
     WeaponEnhancer,
+    SpeedEnhancer,
     Companion
 }
