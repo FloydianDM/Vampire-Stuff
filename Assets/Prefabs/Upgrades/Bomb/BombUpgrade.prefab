@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf0899e32782f24d9548e95d05dfac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 5119965223135909660}
   _bombUpgradeDetails: {fileID: 0}
   BombDetonator: {fileID: 0}
   BombActivationEvent: {fileID: 0}

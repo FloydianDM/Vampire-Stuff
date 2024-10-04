@@ -39,13 +39,15 @@ public class PlayerControls : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            EnablePlayerControls(false);
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            EnablePlayerControls(true);
+            case GameState.Pause:
+            case GameState.LevelUp:
+                EnablePlayerControls(false);
+                break;
+            case GameState.Play:
+                EnablePlayerControls(true);
+                break;
         }
     }
 

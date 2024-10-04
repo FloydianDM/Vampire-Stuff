@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "BombUpgradeDetails_", menuName = "ScriptableObjects/Upgrades/Bombs/BombUpgradeDetails")]
 public class BombUpgradeDetailsSO : UpgradeDetailsSO

@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        if (_gameManager.GameState == GameState.PauseMenu)
+        if (_gameManager.GameState == GameState.Pause)
         {
             _shouldFollow = false;
         }
@@ -47,15 +47,17 @@ public class EnemyMovement : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            _shouldFollow = false;
-            StopAllCoroutines();
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            _shouldFollow = true;
-            FollowPlayer();
+            case GameState.Pause:
+            case GameState.LevelUp:
+                _shouldFollow = false;
+                StopAllCoroutines();
+                break;
+            case GameState.Play:
+                _shouldFollow = true;
+                FollowPlayer();
+                break;
         }
     }
 

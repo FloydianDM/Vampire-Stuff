@@ -30,13 +30,15 @@ public class Ammo : MonoBehaviour, IFireable
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            _shouldMove = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            _shouldMove = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                _shouldMove = false;
+                break;
+            case GameState.Play:
+                _shouldMove = true;
+                break;
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,22 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
         InstantiatePlayer();
         GameState = GameState.Play;
+        StaticEventHandler.CallGameStateChangedEvent(GameState);
+    }
+
+    private void OnEnable()
+    {
+        Player.LevelUpEvent.OnLevelUpEvent += LevelUpEvent_OnLevelUpEvent;
+    }
+
+    private void OnDisable()
+    {
+        Player.LevelUpEvent.OnLevelUpEvent -= LevelUpEvent_OnLevelUpEvent;
+    }
+
+    private void LevelUpEvent_OnLevelUpEvent(LevelUpEvent @event, LevelUpEventArgs args)
+    {
+        GameState = GameState.LevelUp;
         StaticEventHandler.CallGameStateChangedEvent(GameState);
     }
 

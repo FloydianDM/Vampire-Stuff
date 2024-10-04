@@ -57,6 +57,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5849667509457536793, guid: 46c0a1751ba9536469e032230e315e0f, type: 3}
+      propertyPath: BombUpgradeDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 63582f0d1956a054baab3bf39c8859ae, type: 2}
+    - target: {fileID: 5849667509457536793, guid: 46c0a1751ba9536469e032230e315e0f, type: 3}
       propertyPath: _bombUpgradeDetails
       value: 
       objectReference: {fileID: 11400000, guid: 63582f0d1956a054baab3bf39c8859ae, type: 2}

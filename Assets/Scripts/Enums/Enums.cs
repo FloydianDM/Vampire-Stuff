@@ -9,7 +9,8 @@ public enum TypeEnum
 public enum GameState
 {
     Play,
-    PauseMenu
+    Pause,
+    LevelUp
 }
 
 public enum ChestState

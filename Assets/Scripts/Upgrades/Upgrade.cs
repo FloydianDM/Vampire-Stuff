@@ -7,5 +7,6 @@ public class Upgrade : MonoBehaviour
     protected virtual void Awake()
     {
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        SpriteRenderer.gameObject.SetActive(false);
     }
 }

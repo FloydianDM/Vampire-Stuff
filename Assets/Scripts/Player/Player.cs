@@ -74,13 +74,15 @@ public class Player : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            Animator.enabled = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            Animator.enabled = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                Animator.enabled = false;
+                break;
+            case GameState.Play:
+                Animator.enabled = true;
+                break;
         }
     }
 

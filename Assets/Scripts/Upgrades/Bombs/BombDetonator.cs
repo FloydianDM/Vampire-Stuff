@@ -48,13 +48,15 @@ public class BombDetonator : MonoBehaviour
     
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            _shouldStopTimer = true;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            _shouldStopTimer = false;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                _shouldStopTimer = true;
+                break;
+            case GameState.Play:
+                _shouldStopTimer = false;
+                break;
         }
     }
     
