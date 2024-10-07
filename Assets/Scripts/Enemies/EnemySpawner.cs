@@ -14,6 +14,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
     private int _spawnedEnemyCount;
     private float _timeBetweenSpawns = 1.8f;
     private float _spawnTimeModifier = 0.1f;
+    private float _enemySpawnerDelay = 1f;
     private bool _shouldSpawn = true;
 
     private PoolManager _poolManager => PoolManager.Instance;
@@ -21,7 +22,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void Start()
     {
-        SpawnEnemies();
+        //SpawnEnemies();
         _gameManager.Player.LevelUpEvent.OnLevelUpEvent += LevelUpEvent_OnLevelUpEvent;
     }
 
@@ -46,6 +47,7 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
                 break;
             case GameState.Play:
                 _shouldSpawn = true;
+                SpawnEnemies();
                 break;
         }
     }
@@ -66,17 +68,14 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private IEnumerator SpawnEnemiesRoutine()
     {
+        yield return new WaitForSeconds(_enemySpawnerDelay);
+        
         if (_spawnPositionArray.Length > 0)
         {
-            while (true)
+            while (_shouldSpawn)
             {
                 if (_spawnedEnemyCount < _enemiesToSpawn)
                 {
-                    while (!_shouldSpawn)
-                    {
-                        yield return null;
-                    }
-
                     Vector2 spawnPosition = _spawnPositionArray[Random.Range(0, _spawnPositionArray.Length)].position;
                     GameObject enemyPrefab = EnemyPrefabList[Random.Range(0, EnemyPrefabList.Count)];
 

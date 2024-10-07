@@ -17,7 +17,7 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
         public TypeEnum Type;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _objectPoolTransform = gameObject.transform;
 

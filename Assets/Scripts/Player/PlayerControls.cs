@@ -96,7 +96,7 @@ public class PlayerControls : MonoBehaviour
 
     private void MovementInput()
     {
-        _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.PlayerDetails.Speed, _movement);
+        _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.Speed, _movement);
 
         if (_movement == Vector2.zero)
         {

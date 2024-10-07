@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public List<Weapon> WeaponList = new List<Weapon>();
     [HideInInspector] public Health Health;
     [HideInInspector] public BombOperator BombOperator;
+    [HideInInspector] public float Speed;
     
     private void Awake()
     {
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
         PlayerDetails = playerDetails;
         SetPlayerHealth();
         SetStartingWeapon();
+        Speed = PlayerDetails.Speed;
     }
 
     private void SetPlayerHealth()
