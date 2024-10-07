@@ -7,6 +7,8 @@ public class UpgradeSpawner : SingletonMonobehaviour<UpgradeSpawner>
     [SerializeField] private List<GameObject> _bombList;
     [SerializeField] private List<GameObject> _weaponEnhancerList;
     [SerializeField] private List<GameObject> _speedEnhancerList;
+
+    private float _destroyDelay = 10f;
     
     public GameObject FillBombSlot()
     {
@@ -35,8 +37,6 @@ public class UpgradeSpawner : SingletonMonobehaviour<UpgradeSpawner>
         WeaponEnhancerUpgrade weaponEnhancerUpgrade = weaponEnhancerObject.GetComponent<WeaponEnhancerUpgrade>();
         
         weaponEnhancerUpgrade.WeaponWorkshop.EnhanceWeapon();
-        
-        Destroy(weaponEnhancerObject);
     }
 
     public void SpawnSpeedEnhancer(GameObject speedEnhancerGameObject)
@@ -45,7 +45,5 @@ public class UpgradeSpawner : SingletonMonobehaviour<UpgradeSpawner>
         SpeedEnhancerUpgrade speedEnhancerUpgrade = speedEnhancerObject.GetComponent<SpeedEnhancerUpgrade>();
 
         speedEnhancerUpgrade.SpeedModifier.EnhancePlayerSpeed();
-        
-        Destroy(speedEnhancerObject);
     }
 }

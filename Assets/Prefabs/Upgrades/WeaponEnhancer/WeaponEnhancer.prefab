@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8639919765325379846}
-  - component: {fileID: 2536046258628120762}
   - component: {fileID: 1135466181225157691}
   - component: {fileID: 8439538704168047696}
   m_Layer: 0
@@ -35,18 +34,6 @@ Transform:
   - {fileID: 4149042012272346239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2536046258628120762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69503544488423735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5edf99ddefb5084cbdee2bec5e860b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1135466181225157691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponEnhancerUpgradeDetails: {fileID: 0}
-  WeaponEnhancingEvent: {fileID: 0}
   WeaponWorkshop: {fileID: 0}
 --- !u!114 &8439538704168047696
 MonoBehaviour:

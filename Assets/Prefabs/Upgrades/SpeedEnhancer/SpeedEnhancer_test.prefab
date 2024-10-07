@@ -56,7 +56,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedEnhancer_test
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 246386914299105376, guid: cc5d1c5d43cab43428c6262af24cd6f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
