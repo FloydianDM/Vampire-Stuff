@@ -7,10 +7,8 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IUsable
 {
     [SerializeField] private Transform _itemSpawnPoint;
-
-    private SpriteRenderer _spriteRenderer;
+    
     private AnimateChest _animateChest;
-    private ChestDetailsSO _chestDetails;
     private GameObject _chestItemGameObject;
     private ChestItem _chestItem;
     private ChestState _chestState = ChestState.Closed;
@@ -25,14 +23,12 @@ public class Chest : MonoBehaviour, IUsable
 
     private void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         Animator = GetComponent<Animator>();
         _animateChest = GetComponent<AnimateChest>();
     }
 
     public void InitializeUsable(ChestDetailsSO chestDetails)
     {
-        _chestDetails = chestDetails;
         _healthPercent = chestDetails.HealthPercent;
         _weaponDetails = chestDetails.WeaponDetails;
         _addedXP = chestDetails.AddedXP;

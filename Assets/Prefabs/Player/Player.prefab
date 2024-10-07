@@ -247,6 +247,7 @@ MonoBehaviour:
   WeaponList: []
   Health: {fileID: 0}
   BombOperator: {fileID: 0}
+  Speed: 0
 --- !u!114 &2250984322768080538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee044df3d6d655c4eaff8df1b1f88639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _xpThreshold: 50
+  _xpThreshold: 1
 --- !u!114 &931068924312645821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +444,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccf9ea23d48d5c478fe5b39177c8e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bombUpgradePrefab: {fileID: 641554841933936102, guid: 2693876306264bd489ca1eeb5fd4eafa, type: 3}
   HasBombInPocket: 0
 --- !u!1 &6716737026685624138
 GameObject:

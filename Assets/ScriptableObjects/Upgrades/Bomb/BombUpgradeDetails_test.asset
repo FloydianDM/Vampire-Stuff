@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5690c3a28528a4994769c33b825c89, type: 3}
   m_Name: BombUpgradeDetails_test
   m_EditorClassIdentifier: 
-  Type: test
+  Type: Bomb
   Sprite: {fileID: 422128360, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
   SpriteColor: {r: 0.9811321, g: 0.06016379, b: 0.06016379, a: 1}
   UpgradeType: 0

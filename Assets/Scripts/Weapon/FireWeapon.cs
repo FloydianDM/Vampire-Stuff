@@ -84,17 +84,17 @@ public class FireWeapon : MonoBehaviour
         }
     }
 
-    private IEnumerator FireAmmoRoutine(AmmoDetailsSO ammo)
+    private IEnumerator FireAmmoRoutine(AmmoDetailsSO ammoDetails)
     {
         int ammoCounter = 0;
 
-        int ammoPerShot = Random.Range(ammo.SpawnAmountMin, ammo.SpawnAmountMax + 1);
+        int ammoPerShot = Random.Range(ammoDetails.SpawnAmountMin, ammoDetails.SpawnAmountMax + 1);
 
         float ammoSpawnInterval;
 
         if (ammoPerShot > 1)
         {
-            ammoSpawnInterval = Random.Range(ammo.SpawnIntervalMin, ammo.SpawnIntervalMax + Mathf.Epsilon);
+            ammoSpawnInterval = Random.Range(ammoDetails.SpawnIntervalMin, ammoDetails.SpawnIntervalMax + Mathf.Epsilon);
         }
         else
         {
@@ -105,10 +105,11 @@ public class FireWeapon : MonoBehaviour
         {
             ammoCounter++;
 
-            GameObject ammoPrefab = ammo.Prefab;
+            GameObject ammoPrefab = ammoDetails.Prefab;
 
-            float ammoSpeed = Random.Range(ammo.SpeedMin, ammo.SpeedMax + Mathf.Epsilon);
-            float ammoRange = Random.Range(ammo.RangeMin, ammo.RangeMax + Mathf.Epsilon);
+            int ammoDamage = Mathf.CeilToInt(Random.Range(ammoDetails.DamageMin, ammoDetails.DamageMax + 1) * _weapon.DamageModifier);
+            float ammoSpeed = Random.Range(ammoDetails.SpeedMin, ammoDetails.SpeedMax + Mathf.Epsilon);
+            float ammoRange = Random.Range(ammoDetails.RangeMin, ammoDetails.RangeMax + Mathf.Epsilon);
 
             IFireable fireableAmmo = 
                 (IFireable)_poolManager.ReuseComponent(ammoPrefab, _weapon.ShootPosition.position, Quaternion.identity);
@@ -154,7 +155,7 @@ public class FireWeapon : MonoBehaviour
                 isFieldEffect = false;
             }
 
-            fireableAmmo.InitialiseAmmo(ammo, ammoSpeed, ammoRange, weaponAimDirectionVector, isAmmoSet, isFieldEffect);
+            fireableAmmo.InitialiseAmmo(ammoDamage, ammoSpeed, ammoRange, weaponAimDirectionVector, isAmmoSet, isFieldEffect);
 
             yield return new WaitForSeconds(ammoSpawnInterval);     
         }

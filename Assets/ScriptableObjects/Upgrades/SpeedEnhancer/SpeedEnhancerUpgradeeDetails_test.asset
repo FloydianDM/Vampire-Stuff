@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad538725b1a48545ac9c91c6fd5ca98, type: 3}
   m_Name: SpeedEnhancerUpgradeeDetails_test
   m_EditorClassIdentifier: 
-  Type: test
+  Type: Speed Enhancer
   Sprite: {fileID: -1770668727, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
   SpriteColor: {r: 0.12577319, g: 1, b: 0, a: 1}
   UpgradeType: 2

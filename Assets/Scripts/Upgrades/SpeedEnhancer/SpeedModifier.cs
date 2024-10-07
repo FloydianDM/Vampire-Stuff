@@ -12,18 +12,8 @@ public class SpeedModifier : MonoBehaviour
         _speedEnhancerUpgrade = GetComponent<SpeedEnhancerUpgrade>();
     }
 
-    private void OnEnable()
+    public void EnhancePlayerSpeed()
     {
-        _speedEnhancerUpgrade.SpeedEnhancingEvent.OnSpeedEnhancing += SpeedEnhancingEvent_OnSpeedEnhancing;
-    }
-
-    private void OnDisable()
-    {
-        _speedEnhancerUpgrade.SpeedEnhancingEvent.OnSpeedEnhancing -= SpeedEnhancingEvent_OnSpeedEnhancing;
-    }
-
-    private void SpeedEnhancingEvent_OnSpeedEnhancing(SpeedEnhancingEvent @event, SpeedEnhancingEventArgs args)
-    {
-        _gameManager.Player.Speed *= args.SpeedModifierValue;
+        _gameManager.Player.Speed *= _speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.SpeedModifier;
     }
 }

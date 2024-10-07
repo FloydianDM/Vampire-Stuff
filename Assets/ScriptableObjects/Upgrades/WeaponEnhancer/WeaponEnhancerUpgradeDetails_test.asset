@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c50af6352a9dc459f5fbfb5a85cf23, type: 3}
+  m_Name: WeaponEnhancerUpgradeDetails_test
+  m_EditorClassIdentifier: 
+  Type: Weapon Enhancer
+  Sprite: {fileID: -1691046001, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
+  SpriteColor: {r: 0.02666688, g: 1, b: 0, a: 1}
+  UpgradeType: 1
+  AttackModifier: 1.2
