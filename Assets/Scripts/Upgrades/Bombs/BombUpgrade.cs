@@ -6,12 +6,13 @@ using UnityEngine;
 public class BombUpgrade : Upgrade
 {
     public BombUpgradeDetailsSO BombUpgradeDetails;
-    [HideInInspector] public BombDetonator BombDetonator;
-    [HideInInspector] public BombActivationEvent BombActivationEvent;
-    [HideInInspector] public float ImpactArea;
-    [HideInInspector] public float CooldownTime;
-    [HideInInspector] public int Damage;
     
+    public BombDetonator BombDetonator { get; private set; }
+    public BombActivationEvent BombActivationEvent { get; private set; }
+    public float ImpactArea { get; private set; }
+    public float CooldownTime { get; private set; }
+    public int Damage { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();

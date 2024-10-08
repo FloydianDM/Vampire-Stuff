@@ -17,7 +17,7 @@ public class EnemyEditorWindow : EditorWindow
 
     #region Scriptable Objects
     private string _enemyType;
-    private string _assetPath = "Assets/ScriptableObjects/Enemies/";
+    private readonly string _assetPath = "Assets/ScriptableObjects/Enemies/";
     private EnemyDetailsSO _newEnemyDetails;
     private EnemyDetailsSO _selectedEnemyDetails;
     private SerializedObject _serializedScriptableObject;
@@ -68,7 +68,7 @@ public class EnemyEditorWindow : EditorWindow
         {
             if (_basePrefab == null || _enemySpawnerPrefab == null)
             {
-                GUIContent notificationWindow = new GUIContent("Please select a base enemy prefab and enemy spawner");
+                GUIContent notificationWindow = new GUIContent("There is no base prefab and/or enemy spawner prefab in resources!");
                 ShowNotification(notificationWindow);
             }
             else
@@ -253,7 +253,6 @@ public class EnemyEditorWindow : EditorWindow
 
     private void EditEnemySpawner(EnemySpawner enemySpawner)
     {
-        // TODO: show changes on GUI
         if (_serializedEnemySpawnerObject == null || _serializedEnemySpawnerObject.targetObject != enemySpawner)
         {
             _serializedEnemySpawnerObject = new SerializedObject(enemySpawner);

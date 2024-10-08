@@ -22,22 +22,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform _weaponTransform;
-    
-    [HideInInspector] public PlayerControls PlayerControls;
-    [HideInInspector] public MovementByVelocityEvent MovementToVelocityEvent;
-    [HideInInspector] public PlayerDetailsSO PlayerDetails;
-    [HideInInspector] public HealthEvent HealthEvent;
-    [HideInInspector] public IdleEvent IdleEvent;
-    [HideInInspector] public ReceiveXP ReceiveXP;
-    [HideInInspector] public ReceiveXPEvent ReceiveXPEvent;
-    [HideInInspector] public PlayerLevelManager PlayerLevelManager;
-    [HideInInspector] public LevelUpEvent LevelUpEvent;
-    [HideInInspector] public Animator Animator;
-    [HideInInspector] public List<Weapon> WeaponList = new List<Weapon>();
-    [HideInInspector] public Health Health;
-    [HideInInspector] public BombOperator BombOperator;
-    [HideInInspector] public float Speed;
-    
+
+    private PlayerDetailsSO _playerDetails;
+    public PlayerControls PlayerControls { get; private set; }
+    public MovementByVelocityEvent MovementToVelocityEvent { get; private set; }
+    public HealthEvent HealthEvent { get; private set; }
+    public IdleEvent IdleEvent { get; private set; }
+    public ReceiveXP ReceiveXP { get; private set; }
+    public ReceiveXPEvent ReceiveXPEvent { get; private set; }
+    public PlayerLevelManager PlayerLevelManager { get; private set; }
+    public LevelUpEvent LevelUpEvent { get; private set; }
+    public Animator Animator { get; private set; }
+    public List<Weapon> WeaponList { get; } = new List<Weapon>();
+    public Health Health { get; private set; }
+    public BombOperator BombOperator { get; private set; }
+    public float Speed { get; private set; }
+
     private void Awake()
     {
         PlayerControls = GetComponent<PlayerControls>();
@@ -89,22 +89,22 @@ public class Player : MonoBehaviour
 
     public void InitialisePlayer(PlayerDetailsSO playerDetails)
     {
-        PlayerDetails = playerDetails;
+        _playerDetails = playerDetails;
         SetPlayerHealth();
         SetStartingWeapon();
-        Speed = PlayerDetails.Speed;
+        Speed = _playerDetails.Speed;
     }
 
     private void SetPlayerHealth()
     {
-        Health.SetStartingHealth(PlayerDetails.Health);
+        Health.SetStartingHealth(_playerDetails.Health);
     }
 
     private void SetStartingWeapon()
     {
         WeaponList.Clear();
-        WeaponList.Add(PlayerDetails.StartingWeaponDetails.Weapon);
-        Instantiate(PlayerDetails.StartingWeaponDetails.Weapon, _weaponTransform);
+        WeaponList.Add(_playerDetails.StartingWeaponDetails.Weapon);
+        Instantiate(_playerDetails.StartingWeaponDetails.Weapon, _weaponTransform);
     }
 
     private void DestroyPlayer()
@@ -138,5 +138,10 @@ public class Player : MonoBehaviour
     public Vector2 GetPlayerPosition()
     {
         return transform.position;
+    }
+
+    public void IncreasePlayerSpeed(float increaseModifier)
+    {
+        Speed *= increaseModifier;
     }
 }

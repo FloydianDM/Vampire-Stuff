@@ -16,8 +16,8 @@ public class Chest : MonoBehaviour, IUsable
     private WeaponDetailsSO _weaponDetails;
     private int _addedXP;
     private bool _isChestEnabled = false;
-    [HideInInspector] public Animator Animator;
-
+    
+    public Animator Animator { get; private set; }
     private GameManager _gameManager => GameManager.Instance;
     private GameResources _gameResources => GameResources.Instance;
 

@@ -47,6 +47,6 @@ MonoBehaviour:
   _bombList:
   - {fileID: 641554841933936102, guid: 2693876306264bd489ca1eeb5fd4eafa, type: 3}
   _weaponEnhancerList:
-  - {fileID: 7248218586142426038, guid: 9bf9cc31b5079cd49bf6f7ccbcbdfcb1, type: 3}
+  - {fileID: 7924632669241788296, guid: 9bf9cc31b5079cd49bf6f7ccbcbdfcb1, type: 3}
   _speedEnhancerList:
   - {fileID: 4615757587538196952, guid: 8d37bf3ef1de6204c8c9ebf9182d4a4d, type: 3}

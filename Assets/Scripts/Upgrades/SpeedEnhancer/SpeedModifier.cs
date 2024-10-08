@@ -14,6 +14,6 @@ public class SpeedModifier : MonoBehaviour
 
     public void EnhancePlayerSpeed()
     {
-        _gameManager.Player.Speed *= _speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.SpeedModifier;
+        _gameManager.Player.IncreasePlayerSpeed(_speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.SpeedModifier);
     }
 }

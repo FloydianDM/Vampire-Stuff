@@ -37,6 +37,8 @@ public class UpgradeSpawner : SingletonMonobehaviour<UpgradeSpawner>
         WeaponEnhancerUpgrade weaponEnhancerUpgrade = weaponEnhancerObject.GetComponent<WeaponEnhancerUpgrade>();
         
         weaponEnhancerUpgrade.WeaponWorkshop.EnhanceWeapon();
+        
+        Destroy(weaponEnhancerObject, _destroyDelay);
     }
 
     public void SpawnSpeedEnhancer(GameObject speedEnhancerGameObject)
@@ -45,5 +47,23 @@ public class UpgradeSpawner : SingletonMonobehaviour<UpgradeSpawner>
         SpeedEnhancerUpgrade speedEnhancerUpgrade = speedEnhancerObject.GetComponent<SpeedEnhancerUpgrade>();
 
         speedEnhancerUpgrade.SpeedModifier.EnhancePlayerSpeed();
+        
+        Destroy(speedEnhancerObject, _destroyDelay);
+    }
+
+    public void AddUpgradeToList(GameObject upgradeObject)
+    {
+        if (upgradeObject.GetComponent<BombUpgrade>() != null)
+        {
+            _bombList.Add(upgradeObject);
+        }
+        else if (upgradeObject.GetComponent<WeaponEnhancerUpgrade>() != null)
+        {
+            _weaponEnhancerList.Add(upgradeObject);
+        }
+        else if (upgradeObject.GetComponent<SpeedEnhancerUpgrade>() != null)
+        {
+            _speedEnhancerList.Add(upgradeObject);
+        }
     }
 }

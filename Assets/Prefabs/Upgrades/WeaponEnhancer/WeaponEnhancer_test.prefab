@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7232839809301721729
+--- !u!1001 &7858533375097714367
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 1135466181225157691, guid: 37f508f362dd9414e80b490031222982, type: 3}
       propertyPath: WeaponEnhancerUpgradeDetails
       value: 
-      objectReference: {fileID: 11400000, guid: bd543b3f69d063047bca48c17616d7c8, type: 2}
+      objectReference: {fileID: 11400000, guid: 89db1a6407de0894e868b849aa121225, type: 2}
     - target: {fileID: 8639919765325379846, guid: 37f508f362dd9414e80b490031222982, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

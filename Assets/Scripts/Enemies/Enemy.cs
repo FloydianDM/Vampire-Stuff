@@ -21,16 +21,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public EnemyDetailsSO EnemyDetails;
+    
     private Health _health;
     private HealthEvent _healthEvent;
     private SpriteRenderer _spriteRenderer;
-    [HideInInspector] public EnemyMovement EnemyMovement;
-    [HideInInspector] public Rigidbody2D Rigidbody;
-    [HideInInspector] public IdleEvent IdleEvent;
-    [HideInInspector] public MovementByVelocityEvent MovementByVelocityEvent;
-    [HideInInspector] public EnemyDieEvent EnemyDieEvent;
-    [HideInInspector] public EnemyDodgeEvent EnemyDodgeEvent;
-    [HideInInspector] public Animator Animator;
+    public EnemyMovement EnemyMovement { get; private set; }
+    public Rigidbody2D Rigidbody { get; private set; }
+    public IdleEvent IdleEvent { get; private set; }
+    public MovementByVelocityEvent MovementByVelocityEvent { get; private set; }
+    public EnemyDieEvent EnemyDieEvent { get; private set; }
+    public EnemyDodgeEvent EnemyDodgeEvent { get; private set; }
+    public Animator Animator { get; private set; }
 
     private void Awake()
     {
