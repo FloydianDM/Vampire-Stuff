@@ -33,5 +33,11 @@ public static class Settings
     public static int IsUsing = Animator.StringToHash("isUsing");
 
     #endregion
-    
+
+    #region OBJECT KEYS
+
+    public const string HIGH_SCORE_KEY = "HighScore";
+
+    #endregion
+
 }

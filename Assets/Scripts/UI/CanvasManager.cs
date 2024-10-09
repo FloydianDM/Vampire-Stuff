@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject _pauseGameNotification;
     [SerializeField] private GameObject _settingsMenuButton;
     [SerializeField] private GameObject _upgradeSelectionUI;
+    [SerializeField] private GameObject _scoreUI;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class CanvasManager : MonoBehaviour
                 _healthUI.SetActive(true);
                 _xpUI.SetActive(true);
                 _playerLevelUI.SetActive(true);
+                _scoreUI.SetActive(true);
                 _pauseGameNotification.SetActive(false);
                 _settingsMenuButton.SetActive(false);
                 _upgradeSelectionUI.SetActive(false);
@@ -45,6 +47,7 @@ public class CanvasManager : MonoBehaviour
                 _healthUI.SetActive(false);
                 _xpUI.SetActive(false);
                 _playerLevelUI.SetActive(false);
+                _scoreUI.SetActive(false);
                 _pauseGameNotification.SetActive(true);
                 _settingsMenuButton.SetActive(true);
                 _upgradeSelectionUI.SetActive(false);
@@ -53,6 +56,7 @@ public class CanvasManager : MonoBehaviour
                 _healthUI.SetActive(false);
                 _xpUI.SetActive(false);
                 _playerLevelUI.SetActive(false);
+                _scoreUI.SetActive(false);
                 _pauseGameNotification.SetActive(false);
                 _settingsMenuButton.SetActive(false);
                 _upgradeSelectionUI.SetActive(true);
