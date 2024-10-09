@@ -71,6 +71,8 @@ public class BombDetonator : MonoBehaviour
         {
             _canDetonate = true;
             _bombCooldownTimer = _bombUpgrade.CooldownTime;
+
+            StaticEventHandler.CallBombReadyEvent(_canDetonate);
         }
     }
 
@@ -90,10 +92,12 @@ public class BombDetonator : MonoBehaviour
         
         foreach (Collider2D col in colliderArray)
         {
-           col.GetComponent<Health>()?.TakeDamage(_bombUpgrade.Damage);
+            col.GetComponent<Health>()?.TakeDamage(_bombUpgrade.Damage);
         }
 
         _canDetonate = false;
+
+        StaticEventHandler.CallBombReadyEvent(_canDetonate);
 
         GameObject bombDetonationEffect = Instantiate(_gameResources.BombDetonationEffect, transform);
         bombDetonationEffect.GetComponent<BombDetonationEffect>().PlayBombDetonationEffect();

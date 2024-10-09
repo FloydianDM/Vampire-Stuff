@@ -3,22 +3,22 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class BombOperator : MonoBehaviour
 {
-    private GameObject _bombPocket;
-    public bool HasBombInPocket;
+    public GameObject BombPocket { get; private set; }
+    public bool HasBombInPocket { get; private set; }
 
     public void AddBombToPocket(GameObject bombUpgrade)
     {
-        if (_bombPocket != null)
+        if (BombPocket != null)
         {
-            Destroy(_bombPocket);
+            Destroy(BombPocket);
         }
 
         HasBombInPocket = true;
-        _bombPocket = Instantiate(bombUpgrade, transform);
+        BombPocket = Instantiate(bombUpgrade, transform);
     }
 
     public void OperateBomb()
     {
-        _bombPocket.GetComponent<BombUpgrade>().BombActivationEvent.CallBombActivationEvent();
+        BombPocket.GetComponent<BombUpgrade>().BombActivationEvent.CallBombActivationEvent();
     }
 }
