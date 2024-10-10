@@ -6,7 +6,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Ammo : MonoBehaviour, IFireable
 {
-    private AmmoDetailsSO _ammoDetails;
+    private int _ammoDamage;
     private float _ammoSpeed;
     private float _ammoRange;
     private Vector2 _fireDirectionVector;
@@ -30,13 +30,15 @@ public class Ammo : MonoBehaviour, IFireable
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            _shouldMove = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            _shouldMove = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                _shouldMove = false;
+                break;
+            case GameState.Play:
+                _shouldMove = true;
+                break;
         }
     }
 
@@ -70,12 +72,12 @@ public class Ammo : MonoBehaviour, IFireable
         }
     }
 
-    public void InitialiseAmmo(
-        AmmoDetailsSO ammoDetails, float ammoSpeed, float ammoRange, Vector2 fireDirectionVector, bool isAmmoSet, bool isFieldEffect)
+    public void InitialiseAmmo(int ammoDamage, float ammoSpeed, float ammoRange, Vector2 fireDirectionVector, bool isAmmoSet, 
+        bool isFieldEffect)
     {
-        _ammoDetails = ammoDetails;
         _isColliding = false;
 
+        _ammoDamage = ammoDamage;
         _ammoSpeed = ammoSpeed;
         _ammoRange = ammoRange;
         _isAmmoSet = isAmmoSet;
@@ -145,10 +147,8 @@ public class Ammo : MonoBehaviour, IFireable
                     return;
                 }
             }
-
-            int ammoDamage = Random.Range(_ammoDetails.DamageMin, _ammoDetails.DamageMax + 1);
-
-            health.TakeDamage(ammoDamage);
+            
+            health.TakeDamage(_ammoDamage);
         }
     }
 }

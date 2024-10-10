@@ -17,22 +17,26 @@ using UnityEngine;
 [RequireComponent(typeof(LevelUpEvent))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AnimatePlayer))]
+[RequireComponent(typeof(BombOperator))]
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Transform WeaponTransform;
-    [HideInInspector] public PlayerControls PlayerControls;
-    [HideInInspector] public MovementByVelocityEvent MovementToVelocityEvent;
-    [HideInInspector] public PlayerDetailsSO PlayerDetails;
-    [HideInInspector] public HealthEvent HealthEvent;
-    [HideInInspector] public IdleEvent IdleEvent;
-    [HideInInspector] public ReceiveXP ReceiveXP;
-    [HideInInspector] public ReceiveXPEvent ReceiveXPEvent;
-    [HideInInspector] public PlayerLevelManager PlayerLevelManager;
-    [HideInInspector] public LevelUpEvent LevelUpEvent;
-    [HideInInspector] public Animator Animator;
-    [HideInInspector] public List<Weapon> WeaponList = new List<Weapon>();
-    [HideInInspector] public Health Health;
+    [SerializeField] private Transform _weaponTransform;
+
+    private PlayerDetailsSO _playerDetails;
+    public PlayerControls PlayerControls { get; private set; }
+    public MovementByVelocityEvent MovementToVelocityEvent { get; private set; }
+    public HealthEvent HealthEvent { get; private set; }
+    public IdleEvent IdleEvent { get; private set; }
+    public ReceiveXP ReceiveXP { get; private set; }
+    public ReceiveXPEvent ReceiveXPEvent { get; private set; }
+    public PlayerLevelManager PlayerLevelManager { get; private set; }
+    public LevelUpEvent LevelUpEvent { get; private set; }
+    public Animator Animator { get; private set; }
+    public List<Weapon> WeaponList { get; } = new List<Weapon>();
+    public Health Health { get; private set; }
+    public BombOperator BombOperator { get; private set; }
+    public float Speed { get; private set; }
 
     private void Awake()
     {
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
         PlayerLevelManager = GetComponent<PlayerLevelManager>();
         LevelUpEvent = GetComponent<LevelUpEvent>();
         Animator = GetComponent<Animator>();
+        BombOperator = GetComponent<BombOperator>();
     }
 
     private void OnEnable()
@@ -70,33 +75,36 @@ public class Player : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            Animator.enabled = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            Animator.enabled = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                Animator.enabled = false;
+                break;
+            case GameState.Play:
+                Animator.enabled = true;
+                break;
         }
     }
 
     public void InitialisePlayer(PlayerDetailsSO playerDetails)
     {
-        PlayerDetails = playerDetails;
+        _playerDetails = playerDetails;
         SetPlayerHealth();
         SetStartingWeapon();
+        Speed = _playerDetails.Speed;
     }
 
     private void SetPlayerHealth()
     {
-        Health.SetStartingHealth(PlayerDetails.Health);
+        Health.SetStartingHealth(_playerDetails.Health);
     }
 
     private void SetStartingWeapon()
     {
         WeaponList.Clear();
-        WeaponList.Add(PlayerDetails.StartingWeaponDetails.Weapon);
-        Instantiate(PlayerDetails.StartingWeaponDetails.Weapon, WeaponTransform);
+        WeaponList.Add(_playerDetails.StartingWeaponDetails.Weapon);
+        Instantiate(_playerDetails.StartingWeaponDetails.Weapon, _weaponTransform);
     }
 
     private void DestroyPlayer()
@@ -111,7 +119,7 @@ public class Player : MonoBehaviour
 
         WeaponList.Add(weapon);
         weapon.WeaponListPosition = WeaponList.Count;
-        Instantiate(weapon, WeaponTransform);
+        Instantiate(weapon, _weaponTransform);
     }
 
     public bool IsWeaponHeldByPlayer(WeaponDetailsSO weaponDetails)
@@ -130,5 +138,10 @@ public class Player : MonoBehaviour
     public Vector2 GetPlayerPosition()
     {
         return transform.position;
+    }
+
+    public void IncreasePlayerSpeed(float increaseModifier)
+    {
+        Speed *= increaseModifier;
     }
 }

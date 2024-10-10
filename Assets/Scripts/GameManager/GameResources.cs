@@ -29,4 +29,6 @@ public class GameResources : MonoBehaviour
     [Header("XP")]
     public Sprite XPIconSprite;
 
+    [Header("Effects")] 
+    public GameObject BombDetonationEffect;
 }

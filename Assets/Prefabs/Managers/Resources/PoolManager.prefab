@@ -57,9 +57,15 @@ MonoBehaviour:
   - PoolSize: 300
     Prefab: {fileID: 109579872958177463, guid: 7fefc9742d060824b94b9edb8ae4318d, type: 3}
     Type: 2
-  - PoolSize: 600
+  - PoolSize: 900
     Prefab: {fileID: 3548588485384254792, guid: cbb47e3b58e8aab46af3daf79ce05d8b, type: 3}
     Type: 3
   - PoolSize: 10
     Prefab: {fileID: 113749268824796239, guid: b86b9542e077d454e9f35018a428d3c7, type: 3}
     Type: 1
+  - PoolSize: 300
+    Prefab: {fileID: 4643434896908016109, guid: ad7ce3f5751cca14ea688fb7cfc9c0e4, type: 3}
+    Type: 2
+  - PoolSize: 300
+    Prefab: {fileID: 388422722144653604, guid: cf1c63f9c11c3af4bac74e00fa0eab7f, type: 3}
+    Type: 2

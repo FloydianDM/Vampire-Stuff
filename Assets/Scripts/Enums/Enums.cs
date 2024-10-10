@@ -9,7 +9,8 @@ public enum TypeEnum
 public enum GameState
 {
     Play,
-    PauseMenu
+    Pause,
+    LevelUp
 }
 
 public enum ChestState
@@ -18,4 +19,12 @@ public enum ChestState
     HealthItem,
     WeaponItem,
     XP
+}
+
+public enum UpgradeTypeEnum
+{
+    Bomb,
+    WeaponEnhancer,
+    SpeedEnhancer,
+    //Companion
 }

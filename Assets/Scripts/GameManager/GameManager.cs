@@ -24,6 +24,29 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         StaticEventHandler.CallGameStateChangedEvent(GameState);
     }
 
+    private void OnEnable()
+    {
+        Player.LevelUpEvent.OnLevelUpEvent += LevelUpEvent_OnLevelUpEvent;
+        StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        Player.LevelUpEvent.OnLevelUpEvent -= LevelUpEvent_OnLevelUpEvent;
+        StaticEventHandler.OnGameStateChanged -= StaticEventHandler_OnGameStateChanged;
+    }
+    
+    private void LevelUpEvent_OnLevelUpEvent(LevelUpEvent @event, LevelUpEventArgs args)
+    {
+        GameState = GameState.LevelUp;
+        StaticEventHandler.CallGameStateChangedEvent(GameState);
+    }
+    
+    private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
+    {
+        GameState = args.GameState;
+    }
+
     private void InstantiatePlayer()
     {
         GameObject playerGameObject = Instantiate(_playerDetails.Prefab, transform.position, Quaternion.identity);

@@ -22,17 +22,18 @@ public class UIControl : MonoBehaviour
 
     private void OnPauseClicked(InputAction.CallbackContext context)
     {
-        if (_gameManager.GameState == GameState.Play)
+        switch (_gameManager.GameState)
         {
-            _gameManager.GameState = GameState.PauseMenu;
+            case GameState.Play:
+                _gameManager.GameState = GameState.Pause;
 
-            StaticEventHandler.CallGameStateChangedEvent(_gameManager.GameState);
+                StaticEventHandler.CallGameStateChangedEvent(_gameManager.GameState);
+                break;
+            case GameState.Pause:
+                _gameManager.GameState = GameState.Play;
+
+                StaticEventHandler.CallGameStateChangedEvent(_gameManager.GameState);
+                break;
         }
-        else if (_gameManager.GameState == GameState.PauseMenu)
-        {
-            _gameManager.GameState = GameState.Play;
-
-            StaticEventHandler.CallGameStateChangedEvent(_gameManager.GameState);
-        }  
     }
 }

@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEditor;
-using System;
-using UnityEngine.Analytics;
 
 // editor for creating enemy details SOs
 public class EnemyEditorWindow : EditorWindow
@@ -19,7 +17,7 @@ public class EnemyEditorWindow : EditorWindow
 
     #region Scriptable Objects
     private string _enemyType;
-    private string _assetPath = "Assets/ScriptableObjects/Enemies/";
+    private readonly string _assetPath = "Assets/ScriptableObjects/Enemies/";
     private EnemyDetailsSO _newEnemyDetails;
     private EnemyDetailsSO _selectedEnemyDetails;
     private SerializedObject _serializedScriptableObject;
@@ -54,7 +52,6 @@ public class EnemyEditorWindow : EditorWindow
 
         GUILayout.Label("Create An Enemy", EditorStyles.boldLabel);
 
-        //_basePrefab = (GameObject)EditorGUILayout.ObjectField("Select Base Enemy Prefab", _basePrefab, typeof(GameObject), false);
         _enemyType = EditorGUILayout.TextField("Enemy Type", _enemyType);
 
         if (_basePrefab == null)
@@ -71,7 +68,7 @@ public class EnemyEditorWindow : EditorWindow
         {
             if (_basePrefab == null || _enemySpawnerPrefab == null)
             {
-                GUIContent notificationWindow = new GUIContent("Please select a base enemy prefab and enemy spawner");
+                GUIContent notificationWindow = new GUIContent("There is no base prefab and/or enemy spawner prefab in resources!");
                 ShowNotification(notificationWindow);
             }
             else
@@ -249,18 +246,17 @@ public class EnemyEditorWindow : EditorWindow
     private EnemySpawner AddEnemyToEnemySpawner(GameObject prefab)
     {
         EnemySpawner enemySpawner = _enemySpawnerPrefab.GetComponent<EnemySpawner>();
-        enemySpawner.EnemyPrefabList.Add(prefab);
+        enemySpawner.AddEnemyToEnemyList(prefab);
 
         return enemySpawner;
     }
 
     private void EditEnemySpawner(EnemySpawner enemySpawner)
     {
-        // TODO: show changes on GUI
         if (_serializedEnemySpawnerObject == null || _serializedEnemySpawnerObject.targetObject != enemySpawner)
         {
             _serializedEnemySpawnerObject = new SerializedObject(enemySpawner);
-            _enemyPrefabListProp = _serializedEnemySpawnerObject.FindProperty("EnemyPrefabList");
+            _enemyPrefabListProp = _serializedEnemySpawnerObject.FindProperty("_enemyPrefabList");
         }
 
         _serializedEnemySpawnerObject.Update();

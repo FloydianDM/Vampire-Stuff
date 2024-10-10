@@ -20,6 +20,7 @@ public class PlayerControls : MonoBehaviour
         _vampireStuffInputActions.Player.Move.performed += OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled += OnPlayerMoveCanceled;
         _vampireStuffInputActions.Player.Use.performed += OnPlayerUsePerformed;
+        _vampireStuffInputActions.Player.Detonate.performed += OnPlayerDetonatePerformed;
 
         StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
     }
@@ -31,19 +32,22 @@ public class PlayerControls : MonoBehaviour
         _vampireStuffInputActions.Player.Move.performed -= OnPlayerMovePerformed;
         _vampireStuffInputActions.Player.Move.canceled -= OnPlayerMoveCanceled;
         _vampireStuffInputActions.Player.Use.performed -= OnPlayerUsePerformed;
+        _vampireStuffInputActions.Player.Detonate.performed -= OnPlayerDetonatePerformed;
 
         StaticEventHandler.OnGameStateChanged -= StaticEventHandler_OnGameStateChanged;
     }
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            EnablePlayerControls(false);
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            EnablePlayerControls(true);
+            case GameState.Pause:
+            case GameState.LevelUp:
+                EnablePlayerControls(false);
+                break;
+            case GameState.Play:
+                EnablePlayerControls(true);
+                break;
         }
     }
 
@@ -79,10 +83,20 @@ public class PlayerControls : MonoBehaviour
     {
         UseItemInput();
     }
+    
+    private void OnPlayerDetonatePerformed(InputAction.CallbackContext context)
+    {
+        if (!_player.BombOperator.HasBombInPocket)
+        {
+            return;
+        }
+
+        _player.BombOperator.OperateBomb();
+    }
 
     private void MovementInput()
     {
-        _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.PlayerDetails.Speed, _movement);
+        _player.MovementToVelocityEvent.CallMovementToVelocityEvent(_player.Speed, _movement);
 
         if (_movement == Vector2.zero)
         {
@@ -127,6 +141,5 @@ public class PlayerControls : MonoBehaviour
 
             _vampireStuffInputActions.Player.Disable();
         }
-
     }
 }

@@ -21,22 +21,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public EnemyDetailsSO EnemyDetails;
-    private Health _health;
     private HealthEvent _healthEvent;
     private SpriteRenderer _spriteRenderer;
-    [HideInInspector] public EnemyMovement EnemyMovement;
-    [HideInInspector] public Rigidbody2D Rigidbody;
-    [HideInInspector] public IdleEvent IdleEvent;
-    [HideInInspector] public MovementByVelocityEvent MovementByVelocityEvent;
-    [HideInInspector] public EnemyDieEvent EnemyDieEvent;
-    [HideInInspector] public EnemyDodgeEvent EnemyDodgeEvent;
-    [HideInInspector] public Animator Animator;
+    public Health Health { get; private set; }
+    public EnemyMovement EnemyMovement { get; private set; }
+    public Rigidbody2D Rigidbody { get; private set; }
+    public IdleEvent IdleEvent { get; private set; }
+    public MovementByVelocityEvent MovementByVelocityEvent { get; private set; }
+    public EnemyDieEvent EnemyDieEvent { get; private set; }
+    public EnemyDodgeEvent EnemyDodgeEvent { get; private set; }
+    public DestroyedEvent DestroyedEvent { get; private set; }
+    public Animator Animator { get; private set; }
 
     private void Awake()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Animator = GetComponent<Animator>();
-        _health = GetComponent<Health>();
+        Health = GetComponent<Health>();
         _healthEvent = GetComponent<HealthEvent>();
         EnemyMovement = GetComponent<EnemyMovement>();
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
         MovementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         EnemyDieEvent = GetComponent<EnemyDieEvent>();
         EnemyDodgeEvent = GetComponent<EnemyDodgeEvent>();
+        DestroyedEvent = GetComponent<DestroyedEvent>();
 
         _spriteRenderer.sprite = EnemyDetails.Sprite;
         _spriteRenderer.color = EnemyDetails.SpriteColor;
@@ -75,13 +77,15 @@ public class Enemy : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            Animator.enabled = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            Animator.enabled = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                Animator.enabled = false;
+                break;
+            case GameState.Play:
+                Animator.enabled = true;
+                break;
         }
     }
 
@@ -98,7 +102,7 @@ public class Enemy : MonoBehaviour
     {
         int enemyHealth = Random.Range(EnemyDetails.HealthMin, EnemyDetails.HealthMax + 1);
 
-        _health.SetStartingHealth(enemyHealth);
+        Health.SetStartingHealth(enemyHealth);
     }
 
     private void DestroyEnemy()

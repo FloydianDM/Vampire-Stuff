@@ -10,6 +10,8 @@ public class EnemyDie : MonoBehaviour
 
     private PoolManager _poolManager => PoolManager.Instance;
     private EnemySpawner _enemySpawner => EnemySpawner.Instance;
+    private ScoreManager _scoreManager => ScoreManager.Instance;
+    private GameManager _gameManager => GameManager.Instance;
 
     private void Awake()
     {
@@ -35,7 +37,10 @@ public class EnemyDie : MonoBehaviour
     private IEnumerator EnemyDieRoutine(float dieTime)
     {
         yield return new WaitForSeconds(dieTime);
-
+        
+        _gameManager.Player.ReceiveXPEvent.CallReceiveXPEvent(_enemy.EnemyDetails.ExperienceDrop);
+        _scoreManager.ScoreChangedEvent.CallScoreChangedEvent(_enemy.Health.StartingHealth);
+        
         EnemyDeathEffect enemyDeathEffect = 
             (EnemyDeathEffect)_poolManager.ReuseComponent(
                 _enemy.EnemyDetails.EnemyDeathEffect.Prefab, transform.position, Quaternion.identity);

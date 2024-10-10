@@ -34,7 +34,7 @@ public class CombatNotifierUI : MonoBehaviour
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        if (args.GameState == GameState.Pause)
         {
             _shouldShow = false;
         }

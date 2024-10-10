@@ -47,13 +47,15 @@ public class ChestSpawner : SingletonMonobehaviour<ChestSpawner>
 
     private void StaticEventHandler_OnGameStateChanged(GameStateChangedEventArgs args)
     {
-        if (args.GameState == GameState.PauseMenu)
+        switch (args.GameState)
         {
-            _shouldSpawn = false;
-        }
-        else if (args.GameState == GameState.Play)
-        {
-            _shouldSpawn = true;
+            case GameState.Pause:
+            case GameState.LevelUp:
+                _shouldSpawn = false;
+                break;
+            case GameState.Play:
+                _shouldSpawn = true;
+                break;
         }
     }
 
