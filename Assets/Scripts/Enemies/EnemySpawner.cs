@@ -7,9 +7,9 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 {
     [SerializeField] private Transform[] _spawnPositionArray;
-    public List<GameObject> EnemyPrefabList;
-    [SerializeField] private int _enemiesToSpawn = 1000;
+    [SerializeField] private List<GameObject> _enemyPrefabList;
 
+    private int _enemiesToSpawnAtFirstLevel = 10;
     private int _maxEnemySpawn = 1000;
     private int _spawnedEnemyCount;
     private float _timeBetweenSpawns = 1.8f;
@@ -22,7 +22,6 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void Start()
     {
-        //SpawnEnemies();
         _gameManager.Player.LevelUpEvent.OnLevelUpEvent += LevelUpEvent_OnLevelUpEvent;
     }
 
@@ -74,10 +73,10 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
         {
             while (_shouldSpawn)
             {
-                if (_spawnedEnemyCount < _enemiesToSpawn)
+                if (_spawnedEnemyCount < _enemiesToSpawnAtFirstLevel)
                 {
                     Vector2 spawnPosition = _spawnPositionArray[Random.Range(0, _spawnPositionArray.Length)].position;
-                    GameObject enemyPrefab = EnemyPrefabList[Random.Range(0, EnemyPrefabList.Count)];
+                    GameObject enemyPrefab = _enemyPrefabList[Random.Range(0, _enemyPrefabList.Count)];
 
                     CreateEnemy(enemyPrefab, spawnPosition);
 
@@ -106,9 +105,14 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     public void IncreaseEnemySpawnNumber(int increasedNumber)
     {
-        if (_enemiesToSpawn <= _maxEnemySpawn - increasedNumber)
+        if (_enemiesToSpawnAtFirstLevel <= _maxEnemySpawn - increasedNumber)
         {
-            _enemiesToSpawn += increasedNumber;
+            _enemiesToSpawnAtFirstLevel += increasedNumber;
         }
+    }
+
+    public void AddEnemyToEnemyList(GameObject enemyObject)
+    { 
+        _enemyPrefabList.Add(enemyObject);
     }
 }

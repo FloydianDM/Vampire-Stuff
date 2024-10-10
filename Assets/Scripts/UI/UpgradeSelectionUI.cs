@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class UpgradeSelectionUI : MonoBehaviour
 {
-    [Header("Game Object References")]
-    [SerializeField] private GameObject _bombSlot;
-    [SerializeField] private GameObject _weaponEnhancerSlot;
-    [SerializeField] private GameObject _speedEnhancerSlot;
     [Header("Game Object Image References")]
     [SerializeField] private Image _bombSlotImage;
     [SerializeField] private Image _weaponEnhancerSlotImage;
@@ -16,6 +12,9 @@ public class UpgradeSelectionUI : MonoBehaviour
     [SerializeField] private TMP_Text _bombSlotTitleText;
     [SerializeField] private TMP_Text _weaponEnhancerTitleText;
     [SerializeField] private TMP_Text _speedEnhancerTitleText;
+    [SerializeField] private TMP_Text _bombSlotNameText;
+    [SerializeField] private TMP_Text _weaponEnhancerNameText;
+    [SerializeField] private TMP_Text _speedEnhancerNameText;
     [SerializeField] private TMP_Text _bombSlotSpecsText;
     [SerializeField] private TMP_Text _weaponEnhancerSpecsText;
     [SerializeField] private TMP_Text _speedEnhancerSpecsText;
@@ -50,14 +49,19 @@ public class UpgradeSelectionUI : MonoBehaviour
         _speedEnhancerSlotImage.color = speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.SpriteColor;
         
         // Slot Type Texts
-        _bombSlotTitleText.text = "Bomb - " + bombUpgrade.BombUpgradeDetails.Type;
-        _weaponEnhancerTitleText.text = "Weapon Enhancer - " + weaponEnhancerUpgrade.WeaponEnhancerUpgradeDetails.Type;
-        _speedEnhancerTitleText.text = "Speed Enhancer - " + speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.Type;
+        _bombSlotTitleText.text = "-BOMB-";
+        _weaponEnhancerTitleText.text = "-WEAPON ENHANCER-";
+        _speedEnhancerTitleText.text = "-SPEED ENHANCER-";
+
+        // Slot Name Texts
+        _bombSlotNameText.text = bombUpgrade.BombUpgradeDetails.Type.ToUpper();
+        _weaponEnhancerNameText.text = weaponEnhancerUpgrade.WeaponEnhancerUpgradeDetails.Type.ToUpper();
+        _speedEnhancerNameText.text = speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.Type.ToUpper();
         
         // Slot Spec Texts
         _bombSlotSpecsText.text = "Damage - " + bombUpgrade.BombUpgradeDetails.Damage + "\n" +
-                                  "Impact Area - " + bombUpgrade.BombUpgradeDetails.ImpactArea + "\n" +
-                                  "Cooldown Time - " + bombUpgrade.BombUpgradeDetails.CooldownTime;
+                                "Impact Area - " + bombUpgrade.BombUpgradeDetails.ImpactArea + "\n" +
+                                "Cooldown Time - " + bombUpgrade.BombUpgradeDetails.CooldownTime;
         _weaponEnhancerSpecsText.text = "Attack Modifier - " + weaponEnhancerUpgrade.WeaponEnhancerUpgradeDetails.AttackModifier + " x";
         _speedEnhancerSpecsText.text = "Speed Modifier - " + speedEnhancerUpgrade.SpeedEnhancerUpgradeDetails.SpeedModifier + " x";
     }

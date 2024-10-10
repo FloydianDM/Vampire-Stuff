@@ -246,7 +246,7 @@ public class EnemyEditorWindow : EditorWindow
     private EnemySpawner AddEnemyToEnemySpawner(GameObject prefab)
     {
         EnemySpawner enemySpawner = _enemySpawnerPrefab.GetComponent<EnemySpawner>();
-        enemySpawner.EnemyPrefabList.Add(prefab);
+        enemySpawner.AddEnemyToEnemyList(prefab);
 
         return enemySpawner;
     }
@@ -256,7 +256,7 @@ public class EnemyEditorWindow : EditorWindow
         if (_serializedEnemySpawnerObject == null || _serializedEnemySpawnerObject.targetObject != enemySpawner)
         {
             _serializedEnemySpawnerObject = new SerializedObject(enemySpawner);
-            _enemyPrefabListProp = _serializedEnemySpawnerObject.FindProperty("EnemyPrefabList");
+            _enemyPrefabListProp = _serializedEnemySpawnerObject.FindProperty("_enemyPrefabList");
         }
 
         _serializedEnemySpawnerObject.Update();

@@ -53,8 +53,8 @@ public class CanvasManager : MonoBehaviour
                 _upgradeSelectionUI.SetActive(false);
                 break;
             case GameState.LevelUp:
-                _healthUI.SetActive(false);
-                _xpUI.SetActive(false);
+                _healthUI.SetActive(true);
+                _xpUI.SetActive(true);
                 _playerLevelUI.SetActive(false);
                 _scoreUI.SetActive(false);
                 _pauseGameNotification.SetActive(false);
