@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c50af6352a9dc459f5fbfb5a85cf23, type: 3}
   m_Name: WeaponEnhancerUpgradeDetails_test
   m_EditorClassIdentifier: 
-  Type: Weapon Enhancer
+  Type: Basic
   Sprite: {fileID: -635448551, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
   SpriteColor: {r: 0, g: 0.5883775, b: 1, a: 1}
   UpgradeType: 1
