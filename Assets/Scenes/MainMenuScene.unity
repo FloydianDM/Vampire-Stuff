@@ -1773,7 +1773,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 489420688}
         m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
-        m_MethodName: OpenSettings
+        m_MethodName: OpenHowToPlay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

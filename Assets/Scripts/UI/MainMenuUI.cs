@@ -25,7 +25,7 @@ public class MainMenuUI : MonoBehaviour
         SceneManager.LoadScene(Settings.SETTINGS_SCENE_TAG, LoadSceneMode.Additive);
     }
 
-    public void HowToPlayButton()
+    public void OpenHowToPlay()
     {
         SceneManager.LoadScene(Settings.HOW_TO_PLAY_SCENE_TAG, LoadSceneMode.Additive);
     }
