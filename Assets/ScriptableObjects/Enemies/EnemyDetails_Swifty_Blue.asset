@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27eaee1842247d04f8fa9c32bff78a72, type: 3}
+  m_Name: EnemyDetails_Swifty_Blue
+  m_EditorClassIdentifier: 
+  Type: Swifty_Blue
+  Sprite: {fileID: -150560684, guid: cf1c2c75459ad0347b0881e8813c001c, type: 3}
+  SpriteColor: {r: 0.062142227, g: 0, b: 0.9433962, a: 1}
+  SpeedMin: 10
+  SpeedMax: 12.5
+  DodgeThrust: 10
+  HealthMin: 25
+  HealthMax: 30
+  Damage: 25
+  ExperienceDrop: 8
+  Awareness: 0.606
+  Agility: 13.64
+  EnemyDeathEffect: {fileID: 11400000, guid: 8d60e927f7406c1499e5caf1dfcae542, type: 2}

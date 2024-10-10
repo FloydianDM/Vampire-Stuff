@@ -1,6 +1,3 @@
-using System;
-using System.Runtime.Remoting.Proxies;
-using Cinemachine.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -309,8 +306,7 @@ public class UpgradeEditorWindow : EditorWindow
                 AssetDatabase.Refresh();
                 EditorUtility.FocusProjectWindow();
                 Selection.activeObject = _newWeaponEnhancerUpgradeDetails;
-                break;
-                
+                break;       
 
             case UpgradeTypeEnum.SpeedEnhancer:             
                 path = AssetDatabase.GenerateUniqueAssetPath(
