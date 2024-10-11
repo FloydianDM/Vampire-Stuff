@@ -44,6 +44,7 @@ public class UpgradeEditorWindow : EditorWindow
     private bool _isNameAndEnumInitialized;
     private bool _isTypeEnumInitialized;
     private UpgradeTypeEnum _typeEnumForModification;
+    private Vector2 _scrollPosition = Vector2.zero;
     
     [MenuItem("Tools/Upgrade Creator")]
     private static void ShowWindow()
@@ -55,6 +56,8 @@ public class UpgradeEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+        _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, true, true);
+
         GUILayout.Space(20);
 
         GUILayout.Label("Create Upgrades", EditorStyles.boldLabel);
@@ -224,6 +227,8 @@ public class UpgradeEditorWindow : EditorWindow
                     
                 break;
         }
+
+        GUILayout.EndScrollView();
     }
 
     private void CreateUpgradeDetailsScriptableObject()

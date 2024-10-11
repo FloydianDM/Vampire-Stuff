@@ -6,6 +6,7 @@ public class PoolEditorWindow : EditorWindow
     private GameObject _poolManagerPrefab;
     private SerializedObject _serializedPoolObject;
     private SerializedProperty _poolListProp;
+    private Vector2 _scrollPosition = Vector2.zero;
 
     [MenuItem("Tools/Pool Creator")]
     private static void ShowWindow()
@@ -17,6 +18,8 @@ public class PoolEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+        _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, true, true);
+
         GUILayout.Space(10);
 
         GUILayout.Label("Pool Editor", EditorStyles.boldLabel);
@@ -35,6 +38,8 @@ public class PoolEditorWindow : EditorWindow
                 SavePoolManager();
             }         
         }
+
+        GUILayout.EndScrollView();
     }
 
     private void EditPoolManager()
@@ -67,5 +72,4 @@ public class PoolEditorWindow : EditorWindow
             Selection.activeObject = _poolManagerPrefab;
         }
     }
-
 }

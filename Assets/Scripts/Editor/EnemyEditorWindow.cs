@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System;
 
 // editor for creating enemy details SOs
 public class EnemyEditorWindow : EditorWindow
@@ -11,8 +12,12 @@ public class EnemyEditorWindow : EditorWindow
     private string _newPrefabVariantName;
     private GameObject _enemySpawnerPrefab;
     private EnemySpawner _enemySpawner;
+    private GameObject _poolManagerPrefab;
+    private PoolManager _poolManager;
     private SerializedObject _serializedEnemySpawnerObject;
     private SerializedProperty _enemyPrefabListProp;
+    private SerializedObject _serializedPoolManagerObject;
+    private SerializedProperty _poolListProp;
     #endregion
 
     #region Scriptable Objects
@@ -36,6 +41,8 @@ public class EnemyEditorWindow : EditorWindow
     private SerializedProperty _enemyDeathEffect;
     #endregion
 
+    private Vector2 _scrollPosition = Vector2.zero;
+
     [MenuItem("Tools/Enemy Creator")]
     private static void ShowWindow()
     {
@@ -46,6 +53,8 @@ public class EnemyEditorWindow : EditorWindow
 
     private void OnGUI()
     {
+        _scrollPosition = GUILayout.BeginScrollView(_scrollPosition, true, true);
+
         GUILayout.Space(20);
 
         // create enemy section
@@ -62,6 +71,11 @@ public class EnemyEditorWindow : EditorWindow
         if (_enemySpawnerPrefab == null)
         {
             _enemySpawnerPrefab = Resources.Load<GameObject>("EnemySpawner");
+        }
+
+        if (_poolManagerPrefab == null)
+        {
+            _poolManagerPrefab = Resources.Load<GameObject>("PoolManager");
         }
 
         if (GUILayout.Button("Create New Enemy"))
@@ -104,6 +118,21 @@ public class EnemyEditorWindow : EditorWindow
                 SaveEnemySpawner();
             }
         }
+
+        if (_newPrefab != null && _poolManager == null)
+        {
+            _poolManager = AddEnemyToPoolManager(_newPrefab);
+        }
+
+        if (_poolManager != null)
+        {
+            EditPoolManager(_poolManager);
+
+            if (GUILayout.Button("Save Pool Manager"))
+            {
+                SavePoolManager();
+            }
+        }
     
         GUILayout.Space(20);
 
@@ -123,6 +152,8 @@ public class EnemyEditorWindow : EditorWindow
                 SaveEditedScriptableObject();
             }
         }
+
+        GUILayout.EndScrollView();
     }
 
     private void CreateScriptableObject()
@@ -271,6 +302,40 @@ public class EnemyEditorWindow : EditorWindow
         if (_enemySpawnerPrefab != null)
         {
             EditorUtility.SetDirty(_enemySpawnerPrefab);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            EditorUtility.FocusProjectWindow();
+        }
+    }
+
+    private PoolManager AddEnemyToPoolManager(GameObject newPrefab)
+    {
+        PoolManager poolManager = _poolManagerPrefab.GetComponent<PoolManager>();
+        poolManager.CreatePoolForEnemy(newPrefab);
+
+        return poolManager;
+    }
+
+    private void EditPoolManager(PoolManager poolManager)
+    {
+        if (_serializedPoolManagerObject == null || _serializedPoolManagerObject.targetObject != poolManager)
+        { 
+            _serializedPoolManagerObject = new SerializedObject(poolManager);
+            _poolListProp = _serializedPoolManagerObject.FindProperty("_poolList");
+        }
+
+        _serializedPoolManagerObject.Update();
+
+        EditorGUILayout.PropertyField(_poolListProp);
+
+        _serializedPoolManagerObject.ApplyModifiedProperties();
+    }
+
+    private void SavePoolManager()
+    {
+        if (_poolManagerPrefab != null)
+        {
+            EditorUtility.SetDirty(_poolManagerPrefab);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             EditorUtility.FocusProjectWindow();

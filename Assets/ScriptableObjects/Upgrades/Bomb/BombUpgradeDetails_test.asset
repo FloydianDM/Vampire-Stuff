@@ -17,5 +17,5 @@ MonoBehaviour:
   SpriteColor: {r: 0.9811321, g: 0.06016379, b: 0.06016379, a: 1}
   UpgradeType: 0
   ImpactArea: 20
-  CooldownTime: 15
-  Damage: 100
+  CooldownTime: 20
+  Damage: 50

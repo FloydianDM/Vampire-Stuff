@@ -119,4 +119,15 @@ public class PoolManager : SingletonMonobehaviour<PoolManager>
         return type;
     }
 
+    public void CreatePoolForEnemy(GameObject enemyPrefab)
+    { 
+        Pool enemyPool = new Pool()
+            { 
+                PoolSize = 300,
+                Prefab = enemyPrefab,
+                Type = TypeEnum.Enemy
+            };
+
+        _poolList.Add(enemyPool);
+    }
 }
