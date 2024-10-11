@@ -3,7 +3,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class DealContactDamage : MonoBehaviour
 {
-    [SerializeField] private int _contactDamageAmount;
+    private int _contactDamageAmount;
 
     private bool _isColliding = false;
 
@@ -25,6 +25,11 @@ public class DealContactDamage : MonoBehaviour
         }
 
         ContactDamage(other);
+    }
+
+    public void SetContactDamage(int contactDamage)
+    { 
+        _contactDamageAmount = contactDamage;
     }
 
     private void ContactDamage(Collider2D other)

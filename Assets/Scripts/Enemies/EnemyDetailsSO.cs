@@ -12,6 +12,8 @@ public class EnemyDetailsSO : ScriptableObject
     public int HealthMin;
     public int HealthMax;
     public float Damage;
+    public int ContactDamageMin;
+    public int ContactDamageMax;
     [Range(1, 20)] public int ExperienceDrop;
     [Range(0, 2)] public float Awareness;
     [Range(0, 20)] public float Agility;

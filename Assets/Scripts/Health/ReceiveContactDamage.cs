@@ -4,8 +4,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ReceiveContactDamage : MonoBehaviour
 {
-    [SerializeField] private int _contactDamageAmount;
-
+    private int _contactDamageAmount;
     private Health _health;
 
     private void Awake()
@@ -21,5 +20,6 @@ public class ReceiveContactDamage : MonoBehaviour
         }
         
         _health.TakeDamage(damageAmount);
+        Camera.main.GetComponent<CameraShake>().ShakeCamera();
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(HealthEvent))]
 [RequireComponent(typeof(Destroyed))]
 [RequireComponent(typeof(DestroyedEvent))]
+[RequireComponent(typeof(DealContactDamage))]
 [RequireComponent(typeof(EnemyMovement))]
 [RequireComponent(typeof(AnimateEnemy))]
 [RequireComponent(typeof(Idle))]
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
     public EnemyDetailsSO EnemyDetails;
     private HealthEvent _healthEvent;
     private SpriteRenderer _spriteRenderer;
+    private DealContactDamage _dealContactDamage;
     public Health Health { get; private set; }
     public EnemyMovement EnemyMovement { get; private set; }
     public Rigidbody2D Rigidbody { get; private set; }
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Animator = GetComponent<Animator>();
         Health = GetComponent<Health>();
+        _dealContactDamage = GetComponent<DealContactDamage>();
         _healthEvent = GetComponent<HealthEvent>();
         EnemyMovement = GetComponent<EnemyMovement>();
         Rigidbody = GetComponent<Rigidbody2D>();
@@ -96,13 +99,21 @@ public class Enemy : MonoBehaviour
         transform.position = spawnPosition;
 
         SetEnemyStartingHealth();
-    }    
+        SetEnemyContactDamage();
+    }
+
 
     private void SetEnemyStartingHealth()
     {
         int enemyHealth = Random.Range(EnemyDetails.HealthMin, EnemyDetails.HealthMax + 1);
 
         Health.SetStartingHealth(enemyHealth);
+    }
+    private void SetEnemyContactDamage()
+    {
+        int enemyContactDamage = Random.Range(EnemyDetails.ContactDamageMin, EnemyDetails.ContactDamageMax + 1);
+
+        _dealContactDamage.SetContactDamage(enemyContactDamage);
     }
 
     private void DestroyEnemy()

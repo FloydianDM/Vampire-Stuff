@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Swifty_Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 3405954327376310392, guid: bf5cfdb76a8d9754683d89da2e355538, type: 3}
+      propertyPath: _contactDamageAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3787556636097127831, guid: bf5cfdb76a8d9754683d89da2e355538, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -35,6 +35,8 @@ public class EnemyEditorWindow : EditorWindow
     private SerializedProperty _healthMinProp;
     private SerializedProperty _healthMaxProp;
     private SerializedProperty _damageProp;
+    private SerializedProperty _contactDamageMinProp;
+    private SerializedProperty _contactDamageMaxProp;
     private SerializedProperty _experienceDropProp;
     private SerializedProperty _awarenessProp;
     private SerializedProperty _agilityProp;
@@ -172,6 +174,8 @@ public class EnemyEditorWindow : EditorWindow
         _newEnemyDetails.HealthMin = EditorGUILayout.IntField("HealthMin", _newEnemyDetails.HealthMin);
         _newEnemyDetails.HealthMax = EditorGUILayout.IntField("HealthMax", _newEnemyDetails.HealthMax);
         _newEnemyDetails.Damage = EditorGUILayout.FloatField("Damage", _newEnemyDetails.Damage);
+        _newEnemyDetails.ContactDamageMin = EditorGUILayout.IntField("ContactDamageMin", _newEnemyDetails.ContactDamageMin);
+        _newEnemyDetails.ContactDamageMax = EditorGUILayout.IntField("ContactDamageMin", _newEnemyDetails.ContactDamageMax);
         _newEnemyDetails.ExperienceDrop = EditorGUILayout.IntSlider("ExperienceDrop", _newEnemyDetails.ExperienceDrop, 1, 20);
         _newEnemyDetails.Awareness = EditorGUILayout.Slider("Awareness", _newEnemyDetails.Awareness, 0, 2);
         _newEnemyDetails.Agility = EditorGUILayout.Slider("Agility", _newEnemyDetails.Agility, 0, 20);
@@ -200,6 +204,8 @@ public class EnemyEditorWindow : EditorWindow
             _healthMinProp = _serializedScriptableObject.FindProperty("HealthMin");
             _healthMaxProp = _serializedScriptableObject.FindProperty("HealthMax");
             _damageProp = _serializedScriptableObject.FindProperty("Damage");
+            _contactDamageMinProp = _serializedScriptableObject.FindProperty("ContactDamageMin");
+            _contactDamageMaxProp = _serializedScriptableObject.FindProperty("ContactDamageMax");
             _experienceDropProp = _serializedScriptableObject.FindProperty("ExperienceDrop");
             _awarenessProp = _serializedScriptableObject.FindProperty("Awareness");
             _agilityProp = _serializedScriptableObject.FindProperty("Agility");
@@ -217,6 +223,8 @@ public class EnemyEditorWindow : EditorWindow
         EditorGUILayout.PropertyField(_healthMinProp);
         EditorGUILayout.PropertyField(_healthMaxProp);
         EditorGUILayout.PropertyField(_damageProp);
+        EditorGUILayout.PropertyField(_contactDamageMinProp);
+        EditorGUILayout.PropertyField(_contactDamageMaxProp);
         EditorGUILayout.PropertyField(_experienceDropProp);
         EditorGUILayout.PropertyField(_awarenessProp);
         EditorGUILayout.PropertyField(_agilityProp);
