@@ -1,15 +1,18 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CameraShake))]
 [RequireComponent(typeof(Health))]
 [DisallowMultipleComponent]
 public class ReceiveContactDamage : MonoBehaviour
 {
     private int _contactDamageAmount;
     private Health _health;
+    private CameraShake _cameraShake;
 
     private void Awake()
     {
         _health = GetComponent<Health>();
+        _cameraShake = GetComponent<CameraShake>();
     }
 
     public void TakeContactDamage(int damageAmount = 0)
@@ -20,6 +23,6 @@ public class ReceiveContactDamage : MonoBehaviour
         }
         
         _health.TakeDamage(damageAmount);
-        Camera.main.GetComponent<CameraShake>().ShakeCamera();
+        _cameraShake.ShakeCamera();
     }
 }

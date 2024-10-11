@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -7,6 +8,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IUsable
 {
     [SerializeField] private Transform _itemSpawnPoint;
+    [SerializeField] private TextMeshProUGUI _chestNotifierText;
     
     private AnimateChest _animateChest;
     private GameObject _chestItemGameObject;
@@ -40,6 +42,7 @@ public class Chest : MonoBehaviour, IUsable
     {
         gameObject.SetActive(true);
         _isChestEnabled = true;
+        _chestNotifierText.text = Settings.CHEST_OPEN_TEXT;
     }
 
     public void UseItem()
@@ -71,6 +74,7 @@ public class Chest : MonoBehaviour, IUsable
     private void OpenChest()
     {
         _animateChest.AnimateOpenChest();
+        _chestNotifierText.text = Settings.CHEST_PICKUP_TEXT;
         
         // add sound effects
 

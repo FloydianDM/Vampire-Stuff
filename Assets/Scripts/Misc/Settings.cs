@@ -41,4 +41,10 @@ public static class Settings
 
     #endregion
 
+    #region OBJECT TEXTS
+
+    public const string CHEST_OPEN_TEXT = "Press 'E' To Open";
+    public const string CHEST_PICKUP_TEXT = "Press 'E' To Pickup";
+
+    #endregion
 }

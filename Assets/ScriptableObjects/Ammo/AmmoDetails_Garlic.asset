@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Garlic
   Prefab: {fileID: 4424419932862306685, guid: 837fc25ed43da704e900644f85f616b0, type: 3}
-  SpeedMin: 1
-  SpeedMax: 1.5
+  SpeedMin: 1.1
+  SpeedMax: 1.4
   DamageMin: 20
   DamageMax: 30
-  RangeMin: 1
+  RangeMin: 1.1
   RangeMax: 1.5
   RotationSpeed: 0
   SpawnAmountMin: 1

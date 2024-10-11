@@ -312,7 +312,8 @@ MonoBehaviour:
 
     - On level up, you
     can select one of three types of upgrades. You can only have one bomb which has
-    cooldown time.'
+    cooldown time. The bomb is preserved even if you select another type of upgrade
+    on level up.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 934f9836d91ea5849878128932761a80, type: 2}
   m_sharedMaterial: {fileID: 3437971955926905539, guid: 934f9836d91ea5849878128932761a80, type: 2}

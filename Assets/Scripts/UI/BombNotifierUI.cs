@@ -39,7 +39,8 @@ public class BombNotifierUI : MonoBehaviour
         _bombNotifierText.gameObject.SetActive(true);
 
         _bombNotifierText.text = 
-            _gameManager.Player.BombOperator.BombPocket.GetComponent<BombUpgrade>().BombUpgradeDetails.Type + " Bomb is Ready!";
+            _gameManager.Player.BombOperator.BombPocket.GetComponent<BombUpgrade>().BombUpgradeDetails.Type + " Bomb is Ready!\n" + 
+            "Press 'Q' To Activate!";
     }
     
     private void HideBombNotifier()

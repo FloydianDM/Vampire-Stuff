@@ -27,6 +27,8 @@ public class EnemySpawner : SingletonMonobehaviour<EnemySpawner>
 
     private void OnEnable()
     {
+        SpawnEnemies();
+
         StaticEventHandler.OnGameStateChanged += StaticEventHandler_OnGameStateChanged;
     }
 
