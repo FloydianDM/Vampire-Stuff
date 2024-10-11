@@ -21,6 +21,8 @@ MonoBehaviour:
   HealthMin: 150
   HealthMax: 180
   Damage: 50
+  ContactDamageMin: 8
+  ContactDamageMax: 10
   ExperienceDrop: 12
   Awareness: 1.743
   Agility: 2.22
